@@ -12,7 +12,7 @@ namespace SpecflowMozart.Hooks
         [BeforeFeature]
         public static void BeforeFeature()
         {
-
+            SetFrameworkSettings();
         }
 
         [BeforeScenario]
@@ -26,13 +26,14 @@ namespace SpecflowMozart.Hooks
         public void AfterScenario()
         {
 
+            CloseDriver();
         }
 
 
         [AfterFeature]
-        public void AfterFeature()
+        public static void AfterFeature()
         {
-
+            DriverContext.Driver.Quit();
         }
 
     }

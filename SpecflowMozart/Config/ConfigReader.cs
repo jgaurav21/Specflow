@@ -6,7 +6,7 @@ using System.Xml.XPath;
 
 namespace SpecflowMozart.Config
 {
-    public class ConfigReader
+    public class ConfigReader : BasePage
     {
 
 

@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using SpecflowMozart.Base;
+using SpecflowMozart.Config;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SpecflowMozart.Hooks
 {
-    public abstract class HookMethods: BasePage
+    public abstract class HookMethods: ConfigReader
     {
 
         /// <summary>
@@ -35,6 +36,11 @@ namespace SpecflowMozart.Hooks
                     break;
             }
 
+        }
+
+        public void CloseDriver()
+        {
+            DriverContext.Driver.Close();
         }
     }
 }
