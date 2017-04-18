@@ -31,11 +31,19 @@ namespace SpecflowMozart.Hooks
                     DriverContext.Browser = new Browser(DriverContext.Driver);
                     break;
                 case BrowserType.Chrome:
-                    DriverContext.Driver = new ChromeDriver();
+                    var options = new ChromeOptions();
+                    options.BinaryLocation = @"D:\CMD\SpecflowMozart\SpecflowMozart\chromedriver.exe";
+
+                    DriverContext.Driver = new ChromeDriver(options);
                     DriverContext.Browser = new Browser(DriverContext.Driver);
                     break;
             }
 
+        }
+
+        public void NavigateToURL(string url)
+        {
+            DriverContext.Driver.Navigate().GoToUrl(url);
         }
 
         public void CloseDriver()

@@ -71,14 +71,24 @@ namespace SpecflowMozart.Feature
 #line 4
 this.ScenarioSetup(scenarioInfo);
 #line 5
- testRunner.Given("I launch the browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I launch the application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "username"});
+            table1.AddRow(new string[] {
+                        "gauravj@xpanxion.co.in"});
 #line 6
- testRunner.When("I enter username", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 7
- testRunner.And("I enter password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 8
- testRunner.And("I click login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I enter <username> into username", ((string)(null)), table1, "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "password"});
+            table2.AddRow(new string[] {
+                        "Test1234"});
 #line 9
+ testRunner.And("I enter <password> into password", ((string)(null)), table2, "And ");
+#line 12
+ testRunner.And("I click login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 13
  testRunner.Then("I logged into application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

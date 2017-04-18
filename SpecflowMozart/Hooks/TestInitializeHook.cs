@@ -19,6 +19,7 @@ namespace SpecflowMozart.Hooks
         public void BeforeScenario()
         {
             StartDriver(Settings.BrowserType);
+            NavigateToURL(Settings.AUT);
         }
 
 

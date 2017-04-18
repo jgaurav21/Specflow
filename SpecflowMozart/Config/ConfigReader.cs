@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Xml.XPath;
 
 namespace SpecflowMozart.Config
@@ -25,8 +26,8 @@ namespace SpecflowMozart.Config
 
             //string strFilename = Environment.CurrentDirectory.ToString() + @"\Config\GlobalConfig.xml";
             //Console.WriteLine(Environment.CurrentDirectory.ToString());
-
-            string strFileName = @"E:\Project\SpecflowFramework\SpecflowFramework\Config\GlobalConfig.xml";
+            
+            string strFileName = AppDomain.CurrentDomain.BaseDirectory.ToString() + @"\Config\GlobalConfig.xml";
             FileStream stream = new FileStream(strFileName, FileMode.Open);
 
             XPathDocument document = new XPathDocument(stream);
@@ -34,13 +35,13 @@ namespace SpecflowMozart.Config
 
             XPathNavigator navigator = document.CreateNavigator();
             //Get XML Details and pass it in XPathItem type variables
-            browser = navigator.SelectSingleNode("SpecflowFramework/RunSettings/Browser");
-            aut = navigator.SelectSingleNode("SpecflowFramework/RunSettings/AUT");
-            buildname = navigator.SelectSingleNode("SpecflowFramework/RunSettings/BuildName");
-            testtype = navigator.SelectSingleNode("SpecflowFramework/RunSettings/TestType");
-            islog = navigator.SelectSingleNode("SpecflowFramework/RunSettings/IsLog");
-            isreport = navigator.SelectSingleNode("SpecflowFramework/RunSettings/IsReport");
-            logPath = navigator.SelectSingleNode("SpecflowFramework/RunSettings/LogPath");
+            browser = navigator.SelectSingleNode("SpecflowMozart/RunSettings/Browser");
+            aut = navigator.SelectSingleNode("SpecflowMozart/RunSettings/AUT");
+            buildname = navigator.SelectSingleNode("SpecflowMozart/RunSettings/BuildName");
+            testtype = navigator.SelectSingleNode("SpecflowMozart/RunSettings/TestType");
+            islog = navigator.SelectSingleNode("SpecflowMozart/RunSettings/IsLog");
+            isreport = navigator.SelectSingleNode("SpecflowMozart/RunSettings/IsReport");
+            logPath = navigator.SelectSingleNode("SpecflowMozart/RunSettings/LogPath");
 
             //Set XML Details in the property to be used accross framework
             Settings.AUT = aut.Value.ToString();

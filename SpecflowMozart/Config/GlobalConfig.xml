@@ -6,7 +6,7 @@
     <AUT>https://test-insight.cmdgroup.com</AUT>
     
     <!-- Possible flag Chrome,Firefox, IE-->
-    <Browser>Chrome</Browser>
+    <Browser>FireFox</Browser>
     
     <!-- Possible flag Smoke, Regression, Unit  -->
     <TestType>SmokeTest</TestType>
