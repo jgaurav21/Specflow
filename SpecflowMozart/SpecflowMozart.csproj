@@ -101,19 +101,30 @@
     <Compile Include="Base\DriverContext.cs" />
     <Compile Include="Config\ConfigReader.cs" />
     <Compile Include="Config\Settings.cs" />
+    <Compile Include="Extensions\WebDriverExtension.cs" />
+    <Compile Include="Extensions\WebElementExtensions.cs" />
+    <Compile Include="Feature\LoginFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LoginFeature.feature</DependentUpon>
+    </Compile>
     <Compile Include="Helper\ExcelHelper.cs" />
     <Compile Include="Helper\LogHelper.cs" />
+    <Compile Include="Hooks\HookMethods.cs" />
+    <Compile Include="Hooks\TestInitializeHook.cs" />
+    <Compile Include="Pages\HomePage.cs" />
+    <Compile Include="Pages\LoginPage.cs" />
+    <Compile Include="Steps\LoginSteps.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-    <Folder Include="Feature\" />
-    <Folder Include="Pages\" />
-    <Folder Include="Steps\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Feature\LoginFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>LoginFeature.feature.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

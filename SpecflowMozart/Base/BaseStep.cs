@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpecflowMozart.Base
 {
-    public class BaseStep
+    public class BaseStep : Base
     {
     }
 }
