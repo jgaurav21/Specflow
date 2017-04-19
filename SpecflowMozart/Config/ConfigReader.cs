@@ -1,4 +1,5 @@
 ﻿using SpecflowMozart.Base;
+using SpecflowMozart.Helper;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,12 +22,13 @@ namespace SpecflowMozart.Config
             XPathItem buildname;
             XPathItem logPath;
             XPathItem browser;
+            XPathItem useLocalSettings;
 
 
 
             //string strFilename = Environment.CurrentDirectory.ToString() + @"\Config\GlobalConfig.xml";
             //Console.WriteLine(Environment.CurrentDirectory.ToString());
-            
+
             string strFileName = AppDomain.CurrentDomain.BaseDirectory.ToString() + @"\Config\GlobalConfig.xml";
             FileStream stream = new FileStream(strFileName, FileMode.Open);
 
@@ -42,6 +44,7 @@ namespace SpecflowMozart.Config
             islog = navigator.SelectSingleNode("SpecflowMozart/RunSettings/IsLog");
             isreport = navigator.SelectSingleNode("SpecflowMozart/RunSettings/IsReport");
             logPath = navigator.SelectSingleNode("SpecflowMozart/RunSettings/LogPath");
+            useLocalSettings = navigator.SelectSingleNode("SpecflowMozart/RunSettings/useLocalSettings");
 
             //Set XML Details in the property to be used accross framework
             Settings.AUT = aut.Value.ToString();
@@ -51,6 +54,8 @@ namespace SpecflowMozart.Config
             Settings.IsReporting = isreport.Value.ToString();
             Settings.LogPath = logPath.Value.ToString();
             Settings.BrowserType = (BrowserType)Enum.Parse(typeof(BrowserType), browser.Value.ToString());
+
+            LogHelpers.CreateLogFile();
         }
 
     }

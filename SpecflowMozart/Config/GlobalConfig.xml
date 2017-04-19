@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <SpecflowMozart>
   <RunSettings>
+    <UseLocalSettings>Yes</UseLocalSettings>
     <Environment>Test</Environment>
     
     <AUT>https://test-insight.cmdgroup.com</AUT>

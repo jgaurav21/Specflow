@@ -104,6 +104,7 @@
     <Compile Include="Base\DriverContext.cs" />
     <Compile Include="Config\ConfigReader.cs" />
     <Compile Include="Config\Settings.cs" />
+    <Compile Include="DTO\LoginDTO.cs" />
     <Compile Include="Extensions\WebDriverExtension.cs" />
     <Compile Include="Extensions\WebElementExtensions.cs" />
     <Compile Include="Feature\LoginFeature.feature.cs">
@@ -124,6 +125,7 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Data\Data.xlsx" />
     <None Include="Feature\LoginFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>LoginFeature.feature.cs</LastGenOutput>

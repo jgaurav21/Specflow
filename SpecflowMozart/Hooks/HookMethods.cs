@@ -3,6 +3,9 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using SpecflowMozart.Base;
 using SpecflowMozart.Config;
+using SpecflowMozart.DTO;
+using SpecflowMozart.Extensions;
+using SpecflowMozart.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,16 +42,30 @@ namespace SpecflowMozart.Hooks
                     break;
             }
 
+            
+
         }
 
         public void NavigateToURL(string url)
         {
             DriverContext.Driver.Navigate().GoToUrl(url);
+            DriverContext.Driver.WaitForPageLoaded();
         }
 
         public void CloseDriver()
         {
             DriverContext.Driver.Close();
+        }
+
+        public void GetTestData()
+        {
+            if(Settings.useLocalSettings.ToLower()!="yes")
+            {
+                LoginDTO login = new LoginDTO();
+                ExcelHelpers.PopulateInCollection("Data.xlsx");
+
+                login.userName = ExcelHelpers.ReadData(1, "username");
+            }
         }
     }
 }
