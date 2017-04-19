@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using SpecflowMozart.DTO;
 using System;
 using TechTalk.SpecFlow;
 
@@ -36,6 +37,8 @@ namespace SpecflowMozart.Base
         {
             return (TPage)this;
         }
+
+        public static LoginDTO login { get; set; }
 
     }
 }

@@ -29,6 +29,12 @@ namespace SpecflowMozart.Config
 
         public static string Environment { get; set; }
 
+        public static string userName { get; set; }
+
+        public static string password { get; set; }
+
+        public static string customer { get; set; }
+
 
     }
 }

@@ -5,6 +5,10 @@
     <Environment>Test</Environment>
     
     <AUT>https://test-insight.cmdgroup.com</AUT>
+
+    <UserName>gauravj@xpanxion.co.in</UserName>
+    <Password>Test1234</Password>
+    <Customer>Gaurav</Customer>
     
     <!-- Possible flag Chrome,Firefox, IE-->
     <Browser>FireFox</Browser>

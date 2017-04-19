@@ -24,7 +24,7 @@ namespace SpecflowMozart.Steps
         {
             dynamic user = table.CreateDynamicInstance();
             CurrentPage.As<LoginPage>().EnterUserName(user.username);
-            LogHelpers.Write("Username is entered");
+            LogHelpers.Write("Username is entered" + p0);
             
         }
         
@@ -34,7 +34,7 @@ namespace SpecflowMozart.Steps
         {
             dynamic pass = table.CreateDynamicInstance();
             CurrentPage.As<LoginPage>().EnterPassword(pass.password);
-            LogHelpers.Write("Password is entered");
+            LogHelpers.Write("Password is entered " + p0);
         }
 
 

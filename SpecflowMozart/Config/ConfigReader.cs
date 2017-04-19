@@ -23,7 +23,9 @@ namespace SpecflowMozart.Config
             XPathItem logPath;
             XPathItem browser;
             XPathItem useLocalSettings;
-
+            XPathItem userName;
+            XPathItem password;
+            XPathItem customer;
 
 
             //string strFilename = Environment.CurrentDirectory.ToString() + @"\Config\GlobalConfig.xml";
@@ -44,7 +46,11 @@ namespace SpecflowMozart.Config
             islog = navigator.SelectSingleNode("SpecflowMozart/RunSettings/IsLog");
             isreport = navigator.SelectSingleNode("SpecflowMozart/RunSettings/IsReport");
             logPath = navigator.SelectSingleNode("SpecflowMozart/RunSettings/LogPath");
-            useLocalSettings = navigator.SelectSingleNode("SpecflowMozart/RunSettings/useLocalSettings");
+            useLocalSettings = navigator.SelectSingleNode("SpecflowMozart/RunSettings/UseLocalSettings");
+
+            userName = navigator.SelectSingleNode("SpecflowMozart/RunSettings/UserName");
+            password = navigator.SelectSingleNode("SpecflowMozart/RunSettings/Password");
+            customer = navigator.SelectSingleNode("SpecflowMozart/RunSettings/Customer");
 
             //Set XML Details in the property to be used accross framework
             Settings.AUT = aut.Value.ToString();
@@ -54,6 +60,10 @@ namespace SpecflowMozart.Config
             Settings.IsReporting = isreport.Value.ToString();
             Settings.LogPath = logPath.Value.ToString();
             Settings.BrowserType = (BrowserType)Enum.Parse(typeof(BrowserType), browser.Value.ToString());
+            Settings.useLocalSettings = useLocalSettings.Value.ToString();
+            Settings.customer = customer.Value.ToString();
+            Settings.userName = userName.Value.ToString();
+            Settings.password = password.Value.ToString();
 
             LogHelpers.CreateLogFile();
         }

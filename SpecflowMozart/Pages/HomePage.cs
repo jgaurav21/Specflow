@@ -49,9 +49,10 @@ namespace SpecflowMozart.Pages
         /// <summary>
         /// Click on leads button from menu
         /// </summary>
-        public void ClickLeadsButton()
+        public LeadsPage ClickLeadsButton()
         {
             btnLeads.Click();
+            return new LeadsPage();
         }
 
         /// <summary>

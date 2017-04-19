@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using SpecflowMozart.Base;
 using TechTalk.SpecFlow;
 using SpecflowMozart.Config;
+using SpecflowMozart.DTO;
 
 namespace SpecflowMozart.Hooks
 {
@@ -13,6 +14,8 @@ namespace SpecflowMozart.Hooks
         public static void BeforeFeature()
         {
             SetFrameworkSettings();
+            login = GetTestData();
+            
         }
 
         [BeforeScenario]

@@ -57,15 +57,28 @@ namespace SpecflowMozart.Hooks
             DriverContext.Driver.Close();
         }
 
-        public void GetTestData()
+        /// <summary>
+        /// Getting the test data based on settings
+        /// </summary>
+        public static LoginDTO GetTestData()
         {
-            if(Settings.useLocalSettings.ToLower()!="yes")
-            {
-                LoginDTO login = new LoginDTO();
-                ExcelHelpers.PopulateInCollection("Data.xlsx");
+            LoginDTO login = new LoginDTO();
 
+            if (Settings.useLocalSettings.ToLower()!="yes")
+            {
+                
                 login.userName = ExcelHelpers.ReadData(1, "username");
+                login.password = ExcelHelpers.ReadData(1, "password");
+                login.customer = ExcelHelpers.ReadData(1, "customer");
             }
+            else
+            {
+                login.userName = Settings.userName;
+                login.password = Settings.password;
+                login.customer = Settings.customer;
+            }
+
+            return login;
         }
     }
 }
