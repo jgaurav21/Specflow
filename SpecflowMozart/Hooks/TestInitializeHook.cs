@@ -4,6 +4,7 @@ using SpecflowMozart.Base;
 using TechTalk.SpecFlow;
 using SpecflowMozart.Config;
 using SpecflowMozart.DTO;
+using SpecflowMozart.Helper;
 
 namespace SpecflowMozart.Hooks
 {
@@ -21,7 +22,7 @@ namespace SpecflowMozart.Hooks
         [BeforeScenario]
         public void BeforeScenario()
         {
-            
+            LogHelpers.Write($"Start Scenario : {ScenarioContext.Current.ScenarioInfo.Title} ------------");
             StartDriver(Settings.BrowserType);
             NavigateToURL(Settings.AUT);
         }
@@ -30,7 +31,7 @@ namespace SpecflowMozart.Hooks
         [AfterScenario]
         public void AfterScenario()
         {
-
+            LogHelpers.Write($"End Scenarion : {ScenarioContext.Current.ScenarioInfo.Title} ------------");
             CloseDriver();
         }
 
