@@ -64,5 +64,12 @@ namespace SpecflowMozart.Extensions
                 return false;
             }
         }
+
+        public static string GetClass(this IWebElement element)
+        {
+            return element.GetAttribute("class");
+        }
+
+        
     }
 }

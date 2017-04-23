@@ -3,6 +3,7 @@ using SpecflowMozart.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using SpecflowMozart.Extensions;
 
 namespace SpecflowMozart.Pages
 {
@@ -55,6 +56,20 @@ namespace SpecflowMozart.Pages
         {
             expandFilterIcon.Click();
         }
+
+        public void EnterMinProjectValue(string minValue)
+        {
+            minProjectValueInput.Clear();
+            minProjectValueInput.SendKeys(minValue);
+        }
+
+        public void EnterMaxProjectValue(string maxValue)
+        {
+            maxProjectValueInput.Clear();
+            maxProjectValueInput.SendKeys(maxValue);
+        }
+
+
         #endregion Actions
 
         #region Methods
@@ -88,6 +103,26 @@ namespace SpecflowMozart.Pages
         public void ApplyFilters()
         {
 
+        }
+
+        public void ApplyFiltersForSearchTag()
+        {
+            int minValue = 1;
+            int maxValue = 1000;
+            if(!minProjectValueInput.Displayed)
+            {
+                ExpandFilter("Project Value");
+            }
+
+            while (int.Parse(GetSearchResultGridResultCount()) > 1000)
+            {
+                EnterMinProjectValue(minValue.ToString());
+                ClickQuickSearchInput();
+                DriverContext.Driver.WaitForPageLoaded();
+                EnterMaxProjectValue(maxValue.ToString());
+                ClickQuickSearchInput();
+                DriverContext.Driver.WaitForPageLoaded();
+            }
         }
 
         #endregion Methods
