@@ -5,10 +5,10 @@ using TechTalk.SpecFlow.Assist;
 using TechTalk.SpecFlow;
 using SpecflowMozart.Helper;
 
-namespace SpecflowMozart.Steps
+namespace SpecflowMozart.Step
 {
     [Binding]
-    public class LoginSteps : BaseStep
+    public class LoginStep : BaseStep
     {
         [Given(@"I launch the application")]
         public void GivenILaunchTheBrowser()

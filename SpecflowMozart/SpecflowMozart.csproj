@@ -105,6 +105,7 @@
     <Compile Include="Config\ConfigReader.cs" />
     <Compile Include="Config\Settings.cs" />
     <Compile Include="DTO\LoginDTO.cs" />
+    <Compile Include="ExtendedSteps\ExtendedLoginSteps.cs" />
     <Compile Include="Extensions\WebDriverExtension.cs" />
     <Compile Include="Extensions\WebElementExtensions.cs" />
     <Compile Include="Feature\LoginFeature.feature.cs">
@@ -123,10 +124,10 @@
     <Compile Include="Hooks\TestInitializeHook.cs" />
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Pages\LeadsPage.cs" />
+    <Compile Include="Pages\LeadsPageFiltersSection.cs" />
     <Compile Include="Pages\LoginPage.cs" />
     <Compile Include="Steps\LoginSteps.cs" />
     <Compile Include="Steps\SearchTagSteps.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

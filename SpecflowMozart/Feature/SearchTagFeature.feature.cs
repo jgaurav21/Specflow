@@ -73,7 +73,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 6
  testRunner.Given("I login to Leads", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 7
- testRunner.When("I apply filters", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I apply filters for search tag", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 8
  testRunner.And("I create a saved search", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 9

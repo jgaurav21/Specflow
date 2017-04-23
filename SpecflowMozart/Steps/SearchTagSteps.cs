@@ -3,29 +3,20 @@ using System;
 using TechTalk.SpecFlow;
 using OpenQA.Selenium;
 using SpecflowMozart.Pages;
+using SpecflowMozart.ExtendedStep;
 
-namespace SpecflowMozart.Steps
+namespace SpecflowMozart.Step
 {
-    public class SearchTagSteps : BaseStep
+    public class SearchTagStep : BaseStep
     {
-        /// <summary>
-        /// Login to the given application
-        /// </summary>
-        [Given(@"I login to Leads")]
-        public void GivenILoginToLeads()
+
+
+        [When(@"I apply filters for search tag")]
+        public void WhenIApplyFiltersForSearchTag()
         {
-            CurrentPage.GetInstance<LoginPage>();
-
-            CurrentPage=CurrentPage.As<LoginPage>().Login(login.userName, login.password);
-
-            CurrentPage = CurrentPage.As<HomePage>().ClickLeadsButton();
+            
         }
 
-        [When(@"I apply filters")]
-        public void WhenIApplyFilters()
-        {
-            ScenarioContext.Current.Pending();
-        }
 
         [When(@"I create a saved search")]
         public void WhenICreateASavedSearch()
