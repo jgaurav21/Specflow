@@ -13,13 +13,15 @@ namespace SpecflowMozart.ExtendedStep
         /// Login to the given application
         /// </summary>
         [Given(@"I login to (.*)")]
-        public void GivenILoginToLeads(string product)
+        public void GivenILoginToLeads(Product product)
         {
-            CurrentPage.GetInstance<LoginPage>();
+            //CurrentPage.GetInstance<LoginPage>();
 
-            CurrentPage = CurrentPage.As<LoginPage>().Login(login.userName, login.password);
+            //CurrentPage = CurrentPage.As<LoginPage>().Login(login.userName, login.password);
 
-            CurrentPage = CurrentPage.As<HomePage>().ClickLeadsButton();
+            //CurrentPage = CurrentPage.As<HomePage>().ClickLeadsButton();
+                        
+            login.Login<BasePage>(dtLogin.userName, dtLogin.password).ClickLeadsButton();
         }
 
        

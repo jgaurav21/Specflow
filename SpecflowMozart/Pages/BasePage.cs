@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace SpecflowMozart.Pages
 {
-    public class HomePage : BasePage
+    public class BasePage
     {
-
+        
         #region Elements
 
         // menu button on left top corner

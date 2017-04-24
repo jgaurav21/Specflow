@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SpecflowMozart.Pages
 {
-    public class LoginPage : BasePage
+    public class LoginPage
     {
         #region Elements
 
@@ -60,13 +60,15 @@ namespace SpecflowMozart.Pages
         /// </summary>
         /// <param name="userName">username</param>
         /// <param name="password">password</param>
-        public HomePage Login(string userName, string password)
+        public T Login<T>(string userName, string password) where T : new()
         {
             EnterUserName(userName);
             EnterPassword(password);
             ClickLoginButton();
 
-            return GetInstance<HomePage>();
+            return new T();
+
+            //return GetInstance<HomePage>();
         }
 
 

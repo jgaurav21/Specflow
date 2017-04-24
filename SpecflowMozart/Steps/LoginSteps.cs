@@ -14,8 +14,8 @@ namespace SpecflowMozart.Step
         public void GivenILaunchTheBrowser()
         {
             Console.WriteLine("Browser is launched");
-            CurrentPage = GetInstance<LoginPage>();
-
+            //CurrentPage = GetInstance<LoginPage>();
+            
             LogHelpers.Write("Browser Launched");
         }
 
@@ -23,7 +23,9 @@ namespace SpecflowMozart.Step
         public void WhenIEnterIntoUsername(string p0, Table table)
         {
             dynamic user = table.CreateDynamicInstance();
-            CurrentPage.As<LoginPage>().EnterUserName(user.username);
+            //CurrentPage.As<LoginPage>().EnterUserName(user.username);
+
+            login.EnterUserName(user.username);
             LogHelpers.Write("Username is entered" + p0);
             
         }
@@ -33,7 +35,11 @@ namespace SpecflowMozart.Step
         public void WhenIEnterIntoPassword(string p0, Table table)
         {
             dynamic pass = table.CreateDynamicInstance();
-            CurrentPage.As<LoginPage>().EnterPassword(pass.password);
+            //CurrentPage.As<LoginPage>().EnterPassword(pass.password);
+
+            login.EnterPassword(pass.password);
+
+            
             LogHelpers.Write("Password is entered " + p0);
         }
 
@@ -43,7 +49,10 @@ namespace SpecflowMozart.Step
         [When(@"I click login button")]
         public void WhenIClickLoginButton()
         {
-            CurrentPage.As<LoginPage>().ClickLoginButton();
+            //CurrentPage.As<LoginPage>().ClickLoginButton();
+
+            GivenILaunchTheBrowser();
+            login.ClickLoginButton();
             LogHelpers.Write("Login button is clicked");
         }
 

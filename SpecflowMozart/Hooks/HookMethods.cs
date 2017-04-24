@@ -6,6 +6,7 @@ using SpecflowMozart.Config;
 using SpecflowMozart.DTO;
 using SpecflowMozart.Extensions;
 using SpecflowMozart.Helper;
+using SpecflowMozart.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace SpecflowMozart.Hooks
 {
-    public abstract class HookMethods: ConfigReader
+    public abstract class HookMethods : BaseStep
     {
 
         /// <summary>
@@ -62,23 +63,23 @@ namespace SpecflowMozart.Hooks
         /// </summary>
         public static LoginDTO GetTestData()
         {
-            LoginDTO login = new LoginDTO();
+            LoginDTO dtlogin = new LoginDTO();
 
             if (Settings.useLocalSettings.ToLower()!="yes")
             {
                 
-                login.userName = ExcelHelpers.ReadData(1, "username");
-                login.password = ExcelHelpers.ReadData(1, "password");
-                login.customer = ExcelHelpers.ReadData(1, "customer");
+                dtlogin.userName = ExcelHelpers.ReadData(1, "username");
+                dtlogin.password = ExcelHelpers.ReadData(1, "password");
+                dtlogin.customer = ExcelHelpers.ReadData(1, "customer");
             }
             else
             {
-                login.userName = Settings.userName;
-                login.password = Settings.password;
-                login.customer = Settings.customer;
+                dtlogin.userName = Settings.userName;
+                dtlogin.password = Settings.password;
+                dtlogin.customer = Settings.customer;
             }
 
-            return login;
+            return dtlogin;
         }
     }
 }

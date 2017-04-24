@@ -5,6 +5,7 @@ using TechTalk.SpecFlow;
 using SpecflowMozart.Config;
 using SpecflowMozart.DTO;
 using SpecflowMozart.Helper;
+using SpecflowMozart.Pages;
 
 namespace SpecflowMozart.Hooks
 {
@@ -14,14 +15,16 @@ namespace SpecflowMozart.Hooks
         [BeforeFeature]
         public static void BeforeFeature()
         {
-            SetFrameworkSettings();
-            login = GetTestData();
+            ConfigReader.SetFrameworkSettings();
+            dtLogin = GetTestData();
             
         }
 
         [BeforeScenario]
         public void BeforeScenario()
         {
+            login = new LoginPage();
+            
             LogHelpers.Write($"Start Scenario : {ScenarioContext.Current.ScenarioInfo.Title} ------------");
             StartDriver(Settings.BrowserType);
             NavigateToURL(Settings.AUT);
@@ -40,6 +43,29 @@ namespace SpecflowMozart.Hooks
         public static void AfterFeature()
         {
             DriverContext.Driver.Quit();
+        }
+
+        [StepArgumentTransformation(@"I login to (.*)")]
+        public Product ProductTypeTransformer(string product)
+        {
+            Product loginProduct = Product.Leads;
+            switch(product.ToLower())
+            {
+                case "analyze":
+                    loginProduct = Product.Analyze;
+                    break;
+
+                case "forecast":
+                    loginProduct = Product.Forecast;
+                    break;
+
+                case "pulse":
+                    loginProduct = Product.Pulse;
+                    break;
+                    
+            }
+
+            return loginProduct;
         }
 
     }
