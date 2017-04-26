@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using SpecflowMozart.Base;
+using SpecflowMozart.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,6 +67,7 @@ namespace SpecflowMozart.Pages
             EnterPassword(password);
             ClickLoginButton();
 
+            DriverContext.Driver.WaitForPageLoaded();
             return new T();
 
             //return GetInstance<HomePage>();

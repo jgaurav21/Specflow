@@ -20,8 +20,10 @@ namespace SpecflowMozart.ExtendedStep
             //CurrentPage = CurrentPage.As<LoginPage>().Login(login.userName, login.password);
 
             //CurrentPage = CurrentPage.As<HomePage>().ClickLeadsButton();
-                        
-            login.Login<BasePage>(dtLogin.userName, dtLogin.password).ClickLeadsButton();
+
+            currentPage = login.Login<BasePage>(dtLogin.userName, dtLogin.password).ClickLeadsButton();
+            
+
         }
 
        

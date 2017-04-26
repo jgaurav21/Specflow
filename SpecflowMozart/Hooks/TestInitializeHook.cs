@@ -15,6 +15,7 @@ namespace SpecflowMozart.Hooks
         [BeforeFeature]
         public static void BeforeFeature()
         {
+            
             ConfigReader.SetFrameworkSettings();
             dtLogin = GetTestData();
             
@@ -24,7 +25,6 @@ namespace SpecflowMozart.Hooks
         public void BeforeScenario()
         {
             login = new LoginPage();
-            
             LogHelpers.Write($"Start Scenario : {ScenarioContext.Current.ScenarioInfo.Title} ------------");
             StartDriver(Settings.BrowserType);
             NavigateToURL(Settings.AUT);

@@ -14,6 +14,8 @@ namespace SpecflowMozart.Pages
 
         private IWebElement quickSearchInput => DriverContext.Driver.FindElement(By.Id("demo-input-local"));
 
+        private IWebElement saveSearchButtonSpan => DriverContext.Driver.FindElement(By.Id("btnSearch-btnInnerEl"));
+
         #endregion Elements
 
         #region Actions

@@ -16,4 +16,10 @@ namespace SpecflowMozart.Base
         Forecast,
         Pulse
     }
+
+    public enum GridOptions
+    {
+        Project,
+        Companies
+    }
 }

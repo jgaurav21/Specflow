@@ -10,6 +10,8 @@ namespace SpecflowMozart.Step
     [Binding]
     public class LoginStep : BaseStep
     {
+        LoginPage login = new LoginPage();
+
         [Given(@"I launch the application")]
         public void GivenILaunchTheBrowser()
         {

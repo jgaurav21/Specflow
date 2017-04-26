@@ -5,12 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TechTalk.SpecFlow;
 
 namespace SpecflowMozart.Pages
 {
     public class BasePage
     {
-        
+        #region Properties
+        public TPage As<TPage>() where TPage : BasePage
+        {
+            return (TPage)this;
+        }
+
+        #endregion Properties
+
         #region Elements
 
         // menu button on left top corner

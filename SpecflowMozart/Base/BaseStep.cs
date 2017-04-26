@@ -1,4 +1,5 @@
-﻿using SpecflowMozart.DTO;
+﻿using OpenQA.Selenium;
+using SpecflowMozart.DTO;
 using SpecflowMozart.Pages;
 using System;
 using System.Collections.Generic;
@@ -13,19 +14,66 @@ namespace SpecflowMozart.Base
     {
 
         #region Properties
-        private LoginPage _login;
+        //private LoginPage login;
         public LoginPage login
         {
             get
             {
-                return _login;
+                return (LoginPage)ScenarioContext.Current["current"];
             }
             set
             {
-                _login = value;
+                ScenarioContext.Current["current"] = value;
             }
 
         }
+
+        //private BasePage _currentPage;
+
+        public BasePage currentPage
+        {
+            get
+            {
+                return (BasePage)ScenarioContext.Current["new"];
+            }
+            set
+            {
+                ScenarioContext.Current["new"] = value;
+            }
+        }
+
+        //public BasePage CurrentPage
+        //{
+        //    get
+        //    {
+        //        return (BasePage)ScenarioContext.Current["currentPage"];
+        //    }
+        //    set
+        //    {
+        //        ScenarioContext.Current["currentPage"] = value;
+        //    }
+        //}
+
+        //private IWebDriver _driver { get; set; }
+
+        //public T GetInstance<T>() where new()
+        //{
+        //    T pageInstance = new T()
+        //    {
+        //        _driver = DriverContext.Driver
+        //    };
+
+
+
+        //    return pageInstance;
+        //}
+
+        //public TPage As<TPage>() where TPage : BasePage
+        //{
+        //    return (TPage)new BasePage();
+        //}
+
+
         public static LoginDTO dtLogin { get; set; }
 
 

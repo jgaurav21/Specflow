@@ -126,6 +126,8 @@
     <Compile Include="Pages\LeadsPage.cs" />
     <Compile Include="Pages\LeadsPageFiltersSection.cs" />
     <Compile Include="Pages\LoginPage.cs" />
+    <Compile Include="PopUps\SaveSearchPopUp.cs" />
+    <Compile Include="PopUps\SearchTagSelector.cs" />
     <Compile Include="Steps\LoginSteps.cs" />
     <Compile Include="Steps\SearchTagSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using SpecflowMozart.Extensions;
+using SpecflowMozart.Helper;
 
 namespace SpecflowMozart.Pages
 {
@@ -57,16 +58,32 @@ namespace SpecflowMozart.Pages
             expandFilterIcon.Click();
         }
 
+        /// <summary>
+        /// Enter min project value 
+        /// </summary>
+        /// <param name="minValue">value</param>
         public void EnterMinProjectValue(string minValue)
         {
             minProjectValueInput.Clear();
             minProjectValueInput.SendKeys(minValue);
         }
 
+        /// <summary>
+        /// Enter Max project value
+        /// </summary>
+        /// <param name="maxValue">value</param>
         public void EnterMaxProjectValue(string maxValue)
         {
             maxProjectValueInput.Clear();
             maxProjectValueInput.SendKeys(maxValue);
+        }
+
+        /// <summary>
+        /// Check the Show project without value checkbox
+        /// </summary>
+        public void ClickShowProjectWithNoVlaueCheckbox()
+        {
+            showProjectWithoutValuesCheckbox.Click();
         }
 
 
@@ -105,6 +122,10 @@ namespace SpecflowMozart.Pages
 
         }
 
+
+        /// <summary>
+        /// Apply filters valid for search tag
+        /// </summary>
         public void ApplyFiltersForSearchTag()
         {
             int minValue = 1;
@@ -114,15 +135,18 @@ namespace SpecflowMozart.Pages
                 ExpandFilter("Project Value");
             }
 
-            while (int.Parse(GetSearchResultGridResultCount()) > 1000)
+            do
             {
+                maxValue = maxValue / 10;
                 EnterMinProjectValue(minValue.ToString());
                 ClickQuickSearchInput();
                 DriverContext.Driver.WaitForPageLoaded();
                 EnterMaxProjectValue(maxValue.ToString());
                 ClickQuickSearchInput();
                 DriverContext.Driver.WaitForPageLoaded();
-            }
+            } while (int.Parse(GetSearchResultGridResultCount()) < 1000);
+
+            LogHelpers.Write($"Min Project Value : {minValue} and Max Project Value : {maxValue}");
         }
 
         #endregion Methods

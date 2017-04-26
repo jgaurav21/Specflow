@@ -14,7 +14,7 @@ namespace SpecflowMozart.Step
         [When(@"I apply filters for search tag")]
         public void WhenIApplyFiltersForSearchTag()
         {
-            
+            currentPage.As<LeadsPage>().ApplyFiltersForSearchTag();
         }
 
 
