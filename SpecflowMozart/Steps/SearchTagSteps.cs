@@ -21,7 +21,9 @@ namespace SpecflowMozart.Step
         [When(@"I create a saved search")]
         public void WhenICreateASavedSearch()
         {
-            ScenarioContext.Current.Pending();
+            string searchName = currentPage.As<LeadsPage>().CreateSaveSearch();
+
+
         }
 
         [Then(@"I apply search tag to filter")]

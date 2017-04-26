@@ -104,6 +104,7 @@
     <Compile Include="Base\Enums.cs" />
     <Compile Include="Config\ConfigReader.cs" />
     <Compile Include="Config\Settings.cs" />
+    <Compile Include="DTO\dtoCreateSaveSearch.cs" />
     <Compile Include="DTO\LoginDTO.cs" />
     <Compile Include="ExtendedSteps\ExtendedLoginSteps.cs" />
     <Compile Include="Extensions\WebDriverExtension.cs" />

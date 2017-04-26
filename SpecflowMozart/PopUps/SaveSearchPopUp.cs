@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using SpecflowMozart.Base;
+using SpecflowMozart.DTO;
 using SpecflowMozart.Extensions;
 using SpecflowMozart.Pages;
 using System;
@@ -7,7 +8,7 @@ using System.Threading;
 
 namespace SpecflowMozart.PopUps
 {
-    public class SaveSearchPopUp: BasePage
+    public class SaveSearchPopUp
     {
 
         #region Elements
@@ -21,6 +22,8 @@ namespace SpecflowMozart.PopUps
         private IWebElement popUpLoadingImg => saveSearchPopUp.FindElement(By.Id("popup-loading-image"));
 
         private IWebElement popUpLoadingText => saveSearchPopUp.FindElement(By.Id("popup-loading-text"));
+
+        private IWebElement searchTagSelector => saveSearchPopUp.FindElement(By.ClassName("color-preview current-color"));
         #endregion Elements
 
         #region Actions
@@ -40,6 +43,12 @@ namespace SpecflowMozart.PopUps
         /// Click Save button
         /// </summary>
         public void ClickSaveButton() => saveButton.Click();
+
+        public SearchTagSelector ClickSearchTagSelector()
+        {
+            searchTagSelector.Click();
+            return new SearchTagSelector();
+        }
         #endregion Actions
 
 
@@ -71,12 +80,20 @@ namespace SpecflowMozart.PopUps
         /// </summary>
         /// <param name="grid">project / companies</param>
         /// <returns>search name</returns>
-        public string CreateSearch(GridOptions grid)
+        public string CreateSearch(dtoCreateSaveSearch createSearch)
         {
-            
-            string searchName = GenerateSearchName(grid);
+
+            string searchName = GenerateSearchName(createSearch.gridOption);
 
             EnterSearchName(searchName);
+
+            if (createSearch.isSearchTag)
+            {
+                string color = createSearch.searchTagColor ?? "red";
+
+                ClickSearchTagSelector().SelectColor(color);
+            }
+
 
             ClickSaveButton();
 

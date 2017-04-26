@@ -1,6 +1,8 @@
 ﻿using SpecflowMozart.Base;
 using System;
 using OpenQA.Selenium;
+using SpecflowMozart.PopUps;
+using SpecflowMozart.DTO;
 
 namespace SpecflowMozart.Pages
 {
@@ -29,10 +31,26 @@ namespace SpecflowMozart.Pages
         {
             quickSearchInput.Click();
         }
+
+        public SaveSearchPopUp ClickSaveSearch()
+        {
+            saveSearchButtonSpan.Click();
+            return new SaveSearchPopUp();
+        }
+
         #endregion Actions
 
         #region Methods
 
+        public string CreateSaveSearch()
+        {
+            dtoCreateSaveSearch createSearch = new dtoCreateSaveSearch();
+            createSearch.gridOption = GridOptions.Project;
+            createSearch.isSearchTag = true;
+            string searchName = ClickSaveSearch().CreateSearch(createSearch);
+
+            return searchName;
+        }
         #endregion Methods
     }
 }
