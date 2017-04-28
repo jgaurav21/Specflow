@@ -7,14 +7,14 @@ using SpecflowMozart.ExtendedStep;
 
 namespace SpecflowMozart.Step
 {
+    [Binding]
     public class SearchTagStep : BaseStep
     {
-
-
         [When(@"I apply filters for search tag")]
         public void WhenIApplyFiltersForSearchTag()
         {
             currentPage.As<LeadsPage>().ApplyFiltersForSearchTag();
+            
         }
 
 
@@ -29,7 +29,7 @@ namespace SpecflowMozart.Step
         [Then(@"I apply search tag to filter")]
         public void ThenIApplySearchTagToFilter()
         {
-            ScenarioContext.Current.Pending();
+            Console.WriteLine("Search Tag is created");
         }
 
     }

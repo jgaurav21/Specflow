@@ -36,7 +36,7 @@ namespace SpecflowMozart.Hooks
                     break;
                 case BrowserType.Chrome:
                     var options = new ChromeOptions();
-                    options.BinaryLocation = @"D:\CMD\SpecflowMozart\SpecflowMozart\chromedriver.exe";
+                    //options.BinaryLocation = @"D:\CMD\SpecflowMozart\SpecflowMozart\chromedriver.exe";
 
                     DriverContext.Driver = new ChromeDriver(options);
                     DriverContext.Browser = new Browser(DriverContext.Driver);
@@ -55,6 +55,7 @@ namespace SpecflowMozart.Hooks
 
         public void CloseDriver()
         {
+            DriverContext.Driver.Quit();
             DriverContext.Driver.Close();
         }
 

@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using SpecflowMozart.Base;
+using SpecflowMozart.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,19 @@ namespace SpecflowMozart.Pages
         public TPage As<TPage>() where TPage : BasePage
         {
             return (TPage)this;
+        }
+
+
+        private IWebDriver _driver { get; set; }
+
+        public TPage GetInstance<TPage>() where TPage : BasePage, new()
+        {
+            TPage pageInstance = new TPage()
+            {
+                _driver = DriverContext.Driver
+            };
+            
+            return pageInstance;
         }
 
         #endregion Properties
@@ -60,6 +74,7 @@ namespace SpecflowMozart.Pages
         public LeadsPage ClickLeadsButton()
         {
             btnLeads.Click();
+            DriverContext.Driver.WaitForPageLoaded();
             return new LeadsPage();
         }
 

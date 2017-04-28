@@ -19,7 +19,7 @@
     <!-- Possible Flag Y, N -->
     <IsLog>Y</IsLog>
     
-    <LogPath>D:\\Logs\\</LogPath>
+    <LogPath>C:\\Logs\\</LogPath>
     
     <BuildName>DemoBuild</BuildName>
     <!-- Possible Flag Y, N -->

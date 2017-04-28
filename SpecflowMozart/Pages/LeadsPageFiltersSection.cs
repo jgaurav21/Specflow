@@ -91,17 +91,7 @@ namespace SpecflowMozart.Pages
 
         #region Methods
 
-        ///// <summary>
-        ///// Expand the given filter
-        ///// </summary>
-        ///// <param name="filterToExpand">filter to be expanded</param>
-        //public void ExpandFilter(IWebElement filterToExpand)
-        //{
-        //    filter = filterToExpand;
-
-        //    ClickExpandFilter();
-        //}
-
+        
         /// <summary>
         /// Expand the specified filter
         /// </summary>
@@ -117,10 +107,66 @@ namespace SpecflowMozart.Pages
             }
         }
 
-        public void ApplyFilters()
-        {
+        ////public void EnableFilter(string[] filterList)
+        //{
+        //    bool enabled = false;
+        //    IWebElement selectFilter = null;
+        //    //Open 'Add Filters' pop-up
+        //    DriverContext.Driver.ClickWithJS(moreFiltersSpan);
 
-        }
+        //    //Wait for pop-up to load
+        //    SeleniumHelper.WaitForElementVisible(WinConfigFilters(), 10);
+
+        //    if (filterList[0].ToLower().Equals("all"))
+        //    {
+        //        selectFilter = WinConfigFilters().FindElement(By.Id("chkAllFilter"));
+        //        if (!selectFilter.GetAttribute("class").Contains("checked"))
+        //        {
+        //            selectFilter.FindElement(By.XPath(".//span[contains(text(),'All')]")).Click(); //Ranjit P[12/9/2015]: Modified for sencha changes.
+        //            enabled = true;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        selectFilter = WinConfigFilters().FindElement(By.Id("chkAllFilter"));
+        //        if (selectFilter.GetAttribute("class").Contains("checked")) // Remove all filters.
+        //            selectFilter.FindElement(By.XPath(".//span[contains(text(),'All')]")).Click();//Ranjit P[12/9/2015]: Modified for sencha changes.
+        //        else
+        //        {
+        //            //Click twice to un-check all checked filters for fresh selection.
+        //            //Ranjit P[12/9/2015]: Modified for sencha changes.
+        //            //selectFilter.FindElement(By.TagName("input")).Click();
+        //            //selectFilter.FindElement(By.TagName("input")).Click();
+        //            selectFilter.FindElement(By.XPath(".//span[contains(text(),'All')]")).Click();
+        //            selectFilter.FindElement(By.XPath(".//span[contains(text(),'All')]")).Click();
+        //        }
+
+        //        //Select required filters to enable
+        //        foreach (string filter in filterList)
+        //        {
+        //            if (Enums.Filter.IsDefined(typeof(Enums.Filter), filter.Replace(" ", ""))) //If the given filter in the list exists.
+        //            {
+        //                selectFilter = WinConfigFilters().FindElement(By.XPath(".//label[contains(text(),'" + filter + "')]"));
+
+        //                //If filter is already not enabled then enable.
+        //                if (!selectFilter.FindElement(By.XPath("../../../..")).GetAttribute("class").Contains("checked"))
+        //                {
+        //                    selectFilter.Click();
+        //                    enabled = true;
+        //                }
+        //            }
+        //        }
+        //    }
+
+        //    if (enabled)
+        //        WinConfigFilters().FindElement(By.Id("moreFilterSaveClose")).FindElements(By.TagName("span"))[1].Click(); //Click filter save and close button
+        //    else
+        //        WinConfigFilters().FindElement(By.Id("moreFilterCancel")).FindElements(By.TagName("span"))[1].Click(); //Click filter cancel button.
+
+        //    SeleniumHelper.WaitForElementVisible("panelErrorText", 10);
+        //    SeleniumHelper.WaitForElementInvisible("panelErrorText", 10);
+        //    //SeleniumHelper.WaitForPageReady(10);
+        //}
 
 
         /// <summary>
@@ -130,21 +176,29 @@ namespace SpecflowMozart.Pages
         {
             int minValue = 1;
             int maxValue = 1000;
+            int counter = 1;
             if(!minProjectValueInput.Displayed)
             {
                 ExpandFilter("Project Value");
             }
 
-            do
+            while (double.Parse(GetSearchResultGridResultCount()) < 1000)
             {
-                maxValue = maxValue / 10;
+                
                 EnterMinProjectValue(minValue.ToString());
                 ClickQuickSearchInput();
                 DriverContext.Driver.WaitForPageLoaded();
                 EnterMaxProjectValue(maxValue.ToString());
                 ClickQuickSearchInput();
                 DriverContext.Driver.WaitForPageLoaded();
-            } while (int.Parse(GetSearchResultGridResultCount()) < 1000);
+
+                maxValue = maxValue / 10;
+                counter++;
+                if(counter>5)
+                {
+                    break;
+                }
+            } 
 
             LogHelpers.Write($"Min Project Value : {minValue} and Max Project Value : {maxValue}");
         }
