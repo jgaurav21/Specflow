@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-using SpecflowMozart.Base;
+using SpecflowMozart.Bases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -182,15 +182,15 @@ namespace SpecflowMozart.Pages
                 ExpandFilter("Project Value");
             }
 
-            while (double.Parse(GetSearchResultGridResultCount()) < 1000)
+            while (double.Parse(GetSearchResultGridResultCount()) > 1000)
             {
                 
                 EnterMinProjectValue(minValue.ToString());
                 ClickQuickSearchInput();
-                DriverContext.Driver.WaitForPageLoaded();
+                WaitForGridRefresh();
                 EnterMaxProjectValue(maxValue.ToString());
                 ClickQuickSearchInput();
-                DriverContext.Driver.WaitForPageLoaded();
+                WaitForGridRefresh();
 
                 maxValue = maxValue / 10;
                 counter++;

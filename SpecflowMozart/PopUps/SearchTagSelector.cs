@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using SpecflowMozart.Base;
+using SpecflowMozart.Bases;
 using SpecflowMozart.Pages;
 using System;
 using System.Collections.Generic;

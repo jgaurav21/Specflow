@@ -75,8 +75,6 @@ this.ScenarioSetup(scenarioInfo);
 #line 7
  testRunner.When("I apply filters for search tag", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 8
- testRunner.And("I create a saved search", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 9
  testRunner.Then("I apply search tag to filter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

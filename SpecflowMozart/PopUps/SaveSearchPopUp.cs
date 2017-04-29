@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-using SpecflowMozart.Base;
+using SpecflowMozart.Bases;
 using SpecflowMozart.DTO;
 using SpecflowMozart.Extensions;
 using SpecflowMozart.Pages;

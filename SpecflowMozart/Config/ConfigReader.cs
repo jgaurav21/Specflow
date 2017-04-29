@@ -1,4 +1,4 @@
-﻿using SpecflowMozart.Base;
+﻿using SpecflowMozart.Bases;
 using SpecflowMozart.Helper;
 using SpecflowMozart.Pages;
 using System;

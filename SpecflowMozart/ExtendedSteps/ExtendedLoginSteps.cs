@@ -1,8 +1,9 @@
-﻿using SpecflowMozart.Base;
+﻿using SpecflowMozart.Bases;
 using System;
 using TechTalk.SpecFlow;
 using OpenQA.Selenium;
 using SpecflowMozart.Pages;
+using SpecflowMozart.Extensions;
 
 namespace SpecflowMozart.ExtendedStep
 {
@@ -15,17 +16,15 @@ namespace SpecflowMozart.ExtendedStep
         [Given(@"I login to (.*)")]
         public void GivenILoginToLeads(Product product)
         {
-            //CurrentPage.GetInstance<LoginPage>();
 
-            //CurrentPage = CurrentPage.As<LoginPage>().Login(login.userName, login.password);
-
-            //CurrentPage = CurrentPage.As<HomePage>().ClickLeadsButton();
 
             currentPage = login.Login<BasePage>(dtLogin.userName, dtLogin.password);
+            currentPage.WaitForHomePageLoad();
 
-            currentPage = currentPage.As<BasePage>().ClickLeadsButton();
+            currentPage = currentPage.As<BasePage>().NavigateToLeads();
+            DriverContext.Driver.WaitForPageLoaded();
+            currentPage.As<LeadsPage>().WaitForGridRefresh();
             
-
         }
 
        

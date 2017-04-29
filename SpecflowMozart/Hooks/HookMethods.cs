@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
-using SpecflowMozart.Base;
+using SpecflowMozart.Bases;
 using SpecflowMozart.Config;
 using SpecflowMozart.DTO;
 using SpecflowMozart.Extensions;
@@ -55,7 +55,7 @@ namespace SpecflowMozart.Hooks
 
         public void CloseDriver()
         {
-            DriverContext.Driver.Quit();
+            
             DriverContext.Driver.Close();
         }
 

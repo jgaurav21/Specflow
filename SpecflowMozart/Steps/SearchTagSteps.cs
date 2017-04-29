@@ -1,9 +1,10 @@
-﻿using SpecflowMozart.Base;
+﻿using SpecflowMozart.Bases;
 using System;
 using TechTalk.SpecFlow;
 using OpenQA.Selenium;
 using SpecflowMozart.Pages;
 using SpecflowMozart.ExtendedStep;
+using SpecflowMozart.Helper;
 
 namespace SpecflowMozart.Step
 {
@@ -29,7 +30,8 @@ namespace SpecflowMozart.Step
         [Then(@"I apply search tag to filter")]
         public void ThenIApplySearchTagToFilter()
         {
-            Console.WriteLine("Search Tag is created");
+            string searchName = currentPage.As<LeadsPage>().CreateSaveSearch();
+            LogHelpers.Write("Search tag is created successfully");
         }
 
     }

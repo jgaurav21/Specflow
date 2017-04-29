@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
-namespace SpecflowMozart.Base
+namespace SpecflowMozart.Bases
 {
     public class BaseStep : Steps
     {
@@ -34,44 +34,15 @@ namespace SpecflowMozart.Base
         {
             get
             {
-                return (BasePage)ScenarioContext.Current["new"];
+                return (BasePage)ScenarioContext.Current["current"];
             }
             set
             {
-                ScenarioContext.Current["new"] = value;
+                ScenarioContext.Current["current"] = value;
             }
         }
 
-        //public BasePage CurrentPage
-        //{
-        //    get
-        //    {
-        //        return (BasePage)ScenarioContext.Current["currentPage"];
-        //    }
-        //    set
-        //    {
-        //        ScenarioContext.Current["currentPage"] = value;
-        //    }
-        //}
-
-        //private IWebDriver _driver { get; set; }
-
-        //public T GetInstance<T>() where new()
-        //{
-        //    T pageInstance = new T()
-        //    {
-        //        _driver = DriverContext.Driver
-        //    };
-
-
-
-        //    return pageInstance;
-        //}
-
-        //public TPage As<TPage>() where TPage : BasePage
-        //{
-        //    return (TPage)new BasePage();
-        //}
+       
 
 
         public static LoginDTO dtLogin { get; set; }

@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using SpecflowMozart.Base;
+using SpecflowMozart.Bases;
 using SpecflowMozart.Helper;
 using System;
 using System.Collections.Generic;
@@ -286,7 +286,7 @@ namespace SpecflowMozart.Extensions
             }
             catch (Exception e)
             {
-                TestRunner.Reporter.Report("Element not clicked Error = ", e.ToString(), TestRun.Status.Error);
+                LogHelpers.Write($"Element not clicked Error = {e.ToString()}");
             }
 
         }
@@ -313,7 +313,7 @@ namespace SpecflowMozart.Extensions
             });
         }
 
-        public static void WaitForElementInvisible(IWebElement element, int timeout = 10)
+        public static void WaitForElementInvisible(this IWebDriver Driver, IWebElement element, int timeout = 10)
         {
             WebDriverWait wait = new WebDriverWait(DriverContext.Driver, TimeSpan.FromSeconds(timeout));
             wait.Until<bool>((d) =>
@@ -385,7 +385,7 @@ namespace SpecflowMozart.Extensions
             catch (Exception e)
             {
                 if (logError)
-                    TestRunner.Reporter.Report("WaitForElementVisible error = " + e, "", TestRun.Status.Done);
+                    LogHelpers.Write($"WaitForElementVisible error = {e.Message} ");
             }
         }
 
@@ -394,9 +394,9 @@ namespace SpecflowMozart.Extensions
         /// </summary>
         /// <param name="id">HTML id of the element</param>
         /// <param name="timeout">seconds to wait before timeout</param>
-        public static void WaitForElementVisible(By by, int timeout)
+        public static void WaitForElementVisible(this IWebDriver Driver, By by, int timeout)
         {
-            DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(0));
+            //DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(0));
             try
             {
                 WebDriverWait Wait = new WebDriverWait(DriverContext.Driver, TimeSpan.FromSeconds(timeout));
@@ -417,7 +417,7 @@ namespace SpecflowMozart.Extensions
             catch (Exception)
             {
             }
-            finally { DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(Constants.IMPLICIT_WAIT_DEFAULT)); }
+            //finally { DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10)); }
         }
 
         /// <summary>
@@ -449,13 +449,13 @@ namespace SpecflowMozart.Extensions
             {
                 isVisible = false;
             }
-            finally { DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(Constants.IMPLICIT_WAIT_DEFAULT)); }
+            finally { DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10)); }
             return isVisible;
         }
 
-        public static void WaitForElementVisibleQuick(IWebElement element, int timeout = 60)
+        public static void WaitForElementVisibleQuick(this IWebDriver Driver, IWebElement element, int timeout = 60)
         {
-            DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(0));
+            
             try
             {
                 WebDriverWait Wait = new WebDriverWait(DriverContext.Driver, TimeSpan.FromSeconds(timeout));
@@ -476,7 +476,7 @@ namespace SpecflowMozart.Extensions
             catch (Exception)
             {
             }
-            finally { DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(Constants.IMPLICIT_WAIT_DEFAULT)); }
+            
         }
 
         public static void WaitForElementInVisibleQuick(IWebElement element, int timeout = 60)
@@ -502,7 +502,7 @@ namespace SpecflowMozart.Extensions
             catch (Exception)
             {
             }
-            finally { DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(Constants.IMPLICIT_WAIT_DEFAULT)); }
+            finally { DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10)); }
         }
         /// <summary>
         /// This method returns true or false if element is present. It doesnt wait for default timeout.
@@ -535,7 +535,7 @@ namespace SpecflowMozart.Extensions
             catch (Exception)
             {
             }
-            finally { DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(Constants.IMPLICIT_WAIT_DEFAULT)); }
+            finally { DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10)); }
             return present;
         }
         public static bool WaitForElementNotFound(string id, int timeoutSeconds)
@@ -560,7 +560,7 @@ namespace SpecflowMozart.Extensions
 
                 return false;
             }
-            finally { DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(Constants.IMPLICIT_WAIT_DEFAULT)); }
+            finally { DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10)); }
         }
 
         public static bool WaitForElementNotFound(By by, int timeoutSeconds)
@@ -583,7 +583,7 @@ namespace SpecflowMozart.Extensions
                 //timed out so element is found 
                 return false;
             }
-            finally { DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(Constants.IMPLICIT_WAIT_DEFAULT)); }
+            finally { DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10)); }
         }
 
         public static bool IsElementPresentDisplayed(By by)
@@ -601,7 +601,7 @@ namespace SpecflowMozart.Extensions
                 //timed out so element is not found 
                 return false;
             }
-            finally { DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(Constants.IMPLICIT_WAIT_DEFAULT)); }
+            finally { DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10)); }
         }
 
         public static bool ClickElementUntilNotFound(IWebElement element, int timeoutSeconds)
@@ -871,7 +871,7 @@ namespace SpecflowMozart.Extensions
             catch (Exception)
             {
             }
-            finally { DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(Constants.IMPLICIT_WAIT_DEFAULT)); }
+            finally { DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10)); }
         }
 
         public static bool WaitForInnerTextToEqual(IWebElement element, string text, int timeoutSeconds, int pollingMilliseconds)
@@ -901,8 +901,7 @@ namespace SpecflowMozart.Extensions
             }
             catch (Exception e)
             {
-                TestRunner.Reporter.Report("Inner text never set to " + text, " Prior to timeout of " + timeoutSeconds +
-                    "exception = " + e, TestRun.Status.Done);
+                LogHelpers.Write($"Inner text never set to {text} Prior to timeout of {timeoutSeconds} exception = { e}");
                 status = false;
             }
 
@@ -935,10 +934,9 @@ namespace SpecflowMozart.Extensions
                 });
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                TestRunner.Reporter.Report("Inner text never set to " + text, " Prior to timeout of " + timeoutSeconds +
-                    "exception = " + e, TestRun.Status.Done);
+               
                 status = false;
             }
 
@@ -1248,7 +1246,7 @@ namespace SpecflowMozart.Extensions
                 if (DriverContext.Driver.FindElements(by).Count > 0) { if (DriverContext.Driver.FindElement(by).Displayed) { return true; } else { return false; } }
             }
             catch { }
-            finally { DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(Constants.IMPLICIT_WAIT_DEFAULT)); }
+            finally { DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10)); }
             return false;
         }
 
@@ -1256,27 +1254,27 @@ namespace SpecflowMozart.Extensions
         {
             if (positiveCheck)
             {
-                if (SeleniumHelper.IsElementPresentAndVisible(by))
+                if (IsElementPresentAndVisible(by))
                 {
-                    TestRunner.Reporter.Report(messagePart, messagePart + " is displayed", TestRun.Status.Pass);
+                    
                     return true;
                 }
                 else
                 {
-                    TestRunner.Reporter.Report(messagePart, messagePart + " is not displayed", TestRun.Status.Fail);
+                    
                     return false;
                 }
             }
             else
             {
-                if (SeleniumHelper.IsElementPresentAndVisible(by))
+                if (IsElementPresentAndVisible(by))
                 {
-                    TestRunner.Reporter.Report(messagePart, messagePart + " is displayed", TestRun.Status.Fail);
+                   
                     return false;
                 }
                 else
                 {
-                    TestRunner.Reporter.Report(messagePart, messagePart + " is not displayed", TestRun.Status.Pass);
+                    
                     return true;
                 }
             }
@@ -1340,45 +1338,45 @@ namespace SpecflowMozart.Extensions
             wait.Until(driver1 => (bool)((IJavaScriptExecutor)DriverContext.Driver).ExecuteScript("return jQuery.active == 0"));
         }
 
-        public static IWebElement LookFast(By by, int timeoutSeconds = 5, int pollingIntervalMilliseconds = 200, bool reportError = true)
-        {
-            DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(0));
-            IWebElement element = null;
-            try
-            {
-                WebDriverWait Wait = new WebDriverWait(DriverContext.Driver, TimeSpan.FromSeconds(timeoutSeconds));
-                Wait.PollingInterval = TimeSpan.FromMilliseconds(pollingIntervalMilliseconds);
-                Wait.Until<bool>((d) =>
-                {
+        //public static IWebElement LookFast(By by, int timeoutSeconds = 5, int pollingIntervalMilliseconds = 200, bool reportError = true)
+        //{
+        //    DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(0));
+        //    IWebElement element = null;
+        //    try
+        //    {
+        //        WebDriverWait Wait = new WebDriverWait(DriverContext.Driver, TimeSpan.FromSeconds(timeoutSeconds));
+        //        Wait.PollingInterval = TimeSpan.FromMilliseconds(pollingIntervalMilliseconds);
+        //        Wait.Until<bool>((d) =>
+        //        {
 
-                    try
-                    {
-                        element = d.FindElement(by);
-                        if (element.Displayed && element.Enabled)
-                            return true;
-                        else return false;
-                    }
-                    catch (Exception)
-                    {
-                        return false; // wait.until keeps going
-                    }
+        //            try
+        //            {
+        //                element = d.FindElement(by);
+        //                if (element.Displayed && element.Enabled)
+        //                    return true;
+        //                else return false;
+        //            }
+        //            catch (Exception)
+        //            {
+        //                return false; // wait.until keeps going
+        //            }
 
-                });
-            }
-            catch (Exception e)
-            {
-                if (reportError)
-                {
-                    //this means the wait threw an uncaught exception and is done trying
-                    TestRunner.Reporter.Report("find element fast", " By statement = " + by.ToString() + " the error = " + e.ToString(), TestRun.Status.Done);
-                }
-            }
-            finally
-            {
-                DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(Constants.IMPLICIT_WAIT_DEFAULT));
-            }
-            return element;
-        }
+        //        });
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        if (reportError)
+        //        {
+        //            //this means the wait threw an uncaught exception and is done trying
+        //            TestRunner.Reporter.Report("find element fast", " By statement = " + by.ToString() + " the error = " + e.ToString(), TestRun.Status.Done);
+        //        }
+        //    }
+        //    finally
+        //    {
+        //        DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
+        //    }
+        //    return element;
+        //}
 
         public static IWebElement LookFastWithScope(By scopeElementBy, By targetElementBy, int timeoutSeconds = 5, int pollingIntervalMilliseconds = 200, bool reportError = true)
         {
@@ -1411,12 +1409,12 @@ namespace SpecflowMozart.Extensions
                 if (reportError)
                 {
                     //this means the wait threw an uncaught exception and is done trying
-                    TestRunner.Reporter.Report("find element fast", " By statement = " + targetElementBy.ToString() + " the error = " + e.ToString(), TestRun.Status.Done);
+                    
                 }
             }
             finally
             {
-                DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(Constants.IMPLICIT_WAIT_DEFAULT));
+                DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
             }
             return element;
         }
@@ -1452,53 +1450,53 @@ namespace SpecflowMozart.Extensions
                 if (reportError)
                 {
                     //this means the wait threw an uncaught exception and is done trying
-                    TestRunner.Reporter.Report("find element fast", " By statement = " + targetElementBy.ToString() + " the error = " + e.ToString(), TestRun.Status.Done);
+                    
                 }
             }
             finally
             {
-                DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(Constants.IMPLICIT_WAIT_DEFAULT));
+                DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
             }
             return element;
         }
 
-        public static IReadOnlyCollection<IWebElement> LookFastElementCollection(By by, int timeoutSeconds = 5, int pollingIntervalMilliseconds = 200, bool reportError = true)
-        {
+        //public static IReadOnlyCollection<IWebElement> LookFastElementCollection(By by, int timeoutSeconds = 5, int pollingIntervalMilliseconds = 200, bool reportError = true)
+        //{
             
-            IReadOnlyCollection<IWebElement> elements = null;
-            try
-            {
-                WebDriverWait Wait = new WebDriverWait(DriverContext.Driver, TimeSpan.FromSeconds(timeoutSeconds));
-                Wait.PollingInterval = TimeSpan.FromMilliseconds(pollingIntervalMilliseconds);
-                Wait.Until<bool>((d) =>
-                {
+        //    IReadOnlyCollection<IWebElement> elements = null;
+        //    try
+        //    {
+        //        WebDriverWait Wait = new WebDriverWait(DriverContext.Driver, TimeSpan.FromSeconds(timeoutSeconds));
+        //        Wait.PollingInterval = TimeSpan.FromMilliseconds(pollingIntervalMilliseconds);
+        //        Wait.Until<bool>((d) =>
+        //        {
 
-                    try
-                    {
-                        elements = d.FindElements(by);
-                        return true;
-                    }
-                    catch (Exception)
-                    {
-                        return false; // wait.until keeps going
-                    }
+        //            try
+        //            {
+        //                elements = d.FindElements(by);
+        //                return true;
+        //            }
+        //            catch (Exception)
+        //            {
+        //                return false; // wait.until keeps going
+        //            }
 
-                });
-            }
-            catch (Exception e)
-            {
-                if (reportError)
-                {
-                    //this means the wait threw an uncaught exception and is done trying
-                    LogHelpers.Write($"find element fast By statement =  {by.ToString()} the error = {e.ToString()}");
-                }
-            }
-            finally
-            {
-                DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(Constants.IMPLICIT_WAIT_DEFAULT));
-            }
-            return elements;
-        }
+        //        });
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        if (reportError)
+        //        {
+        //            //this means the wait threw an uncaught exception and is done trying
+        //            LogHelpers.Write($"find element fast By statement =  {by.ToString()} the error = {e.ToString()}");
+        //        }
+        //    }
+        //    finally
+        //    {
+        //        DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
+        //    }
+        //    return elements;
+        //}
 
         public static IReadOnlyCollection<IWebElement> LookFastElementCollectionWithScope(By scopeBy, By targetBy, int timeoutSeconds = 5, int pollingIntervalMilliseconds = 200, bool reportError = true)
         {
@@ -1523,135 +1521,134 @@ namespace SpecflowMozart.Extensions
 
                 });
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 if (reportError)
                 {
                     //this means the wait threw an uncaught exception and is done trying
-                    TestRunner.Reporter.Report("Find element fast", " By statement = " + targetBy.ToString() + " the error = " + e.ToString(), TestRun.Status.Done);
                 }
             }
             finally
             {
-                DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(Constants.IMPLICIT_WAIT_DEFAULT));
+                DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
             }
             return elements;
         }
 
-        public static IReadOnlyCollection<IWebElement> LookFastElementCollectionWithScope(IWebElement element, By targetBy, int timeoutSeconds = 5, int pollingIntervalMilliseconds = 200, bool reportError = true)
-        {
-            DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(timeoutSeconds));
-            IReadOnlyCollection<IWebElement> elements = null;
-            try
-            {
-                WebDriverWait Wait = new WebDriverWait(DriverContext.Driver, TimeSpan.FromSeconds(timeoutSeconds));
-                Wait.PollingInterval = TimeSpan.FromMilliseconds(pollingIntervalMilliseconds);
-                Wait.Until<bool>((d) =>
-                {
+        //public static IReadOnlyCollection<IWebElement> LookFastElementCollectionWithScope(IWebElement element, By targetBy, int timeoutSeconds = 5, int pollingIntervalMilliseconds = 200, bool reportError = true)
+        //{
+        //    DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(timeoutSeconds));
+        //    IReadOnlyCollection<IWebElement> elements = null;
+        //    try
+        //    {
+        //        WebDriverWait Wait = new WebDriverWait(DriverContext.Driver, TimeSpan.FromSeconds(timeoutSeconds));
+        //        Wait.PollingInterval = TimeSpan.FromMilliseconds(pollingIntervalMilliseconds);
+        //        Wait.Until<bool>((d) =>
+        //        {
 
-                    try
-                    {
-                        elements = element.FindElements(targetBy);
-                        return true;
-                    }
-                    catch (Exception)
-                    {
-                        return false; // wait.until keeps going
-                    }
+        //            try
+        //            {
+        //                elements = element.FindElements(targetBy);
+        //                return true;
+        //            }
+        //            catch (Exception)
+        //            {
+        //                return false; // wait.until keeps going
+        //            }
 
-                });
-            }
-            catch (Exception e)
-            {
-                if (reportError)
-                {
-                    //this means the wait threw an uncaught exception and is done trying
-                    TestRunner.Reporter.Report("find element fast", " By statement = " + targetBy.ToString() + " the error = " + e.ToString(), TestRun.Status.Done);
-                }
-            }
-            finally
-            {
-                DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(Constants.IMPLICIT_WAIT_DEFAULT));
-            }
-            return elements;
-        }
+        //        });
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        if (reportError)
+        //        {
+        //            //this means the wait threw an uncaught exception and is done trying
+        //            TestRunner.Reporter.Report("find element fast", " By statement = " + targetBy.ToString() + " the error = " + e.ToString(), TestRun.Status.Done);
+        //        }
+        //    }
+        //    finally
+        //    {
+        //        DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
+        //    }
+        //    return elements;
+        //}
 
-        public static void WaitTemplate(IWebElement element, By by = null, int timeoutSeconds = 20, int pollingIntervalMilliseconds = 1000, bool reportError = true)
-        {
-            if (by == null)
-            {
-                by = By.Id("garbage");
-            }
+        //public static void WaitTemplate(IWebElement element, By by = null, int timeoutSeconds = 20, int pollingIntervalMilliseconds = 1000, bool reportError = true)
+        //{
+        //    if (by == null)
+        //    {
+        //        by = By.Id("garbage");
+        //    }
 
-            int i = 0;
+        //    int i = 0;
 
-            try
-            {
-                //sets the implicit wait to zero for the element parameter
-                DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(0));
-                WebDriverWait Wait = new WebDriverWait(DriverContext.Driver, TimeSpan.FromSeconds(timeoutSeconds));
-                Wait.PollingInterval = TimeSpan.FromMilliseconds(pollingIntervalMilliseconds);
-                //Using the below statement you can have the wait itself ignore one or many thrown exception types
-                //Doing this would keep the wait until running even if those exceptions are  
-                //Wait.IgnoreExceptionTypes(typeof(NoSuchFrameException),typeof(NoSuchElementException),
-                //    typeof(NoSuchWindowException),typeof(StaleElementReferenceException));
+        //    try
+        //    {
+        //        //sets the implicit wait to zero for the element parameter
+        //        DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(0));
+        //        WebDriverWait Wait = new WebDriverWait(DriverContext.Driver, TimeSpan.FromSeconds(timeoutSeconds));
+        //        Wait.PollingInterval = TimeSpan.FromMilliseconds(pollingIntervalMilliseconds);
+        //        //Using the below statement you can have the wait itself ignore one or many thrown exception types
+        //        //Doing this would keep the wait until running even if those exceptions are  
+        //        //Wait.IgnoreExceptionTypes(typeof(NoSuchFrameException),typeof(NoSuchElementException),
+        //        //    typeof(NoSuchWindowException),typeof(StaleElementReferenceException));
 
-                // d below is the webdriver we have created to use the polling mechanism and time out
-                // we may use d if we need to using the By in the parameters.  Remember d's implicit wait will be 0
-                Wait.Until<bool>((d) =>
-                {
-                    i++;
-                    System.Diagnostics.Debug.WriteLine("Starting the Logic");
-                    System.Diagnostics.Debug.WriteLine("i =  " + i + " time is " + DateTime.Now.ToString("h:mm:ss.fff tt"));
-                    try
-                    {
-                        if (i > 10)
-                        {
-                            //cause an exception by navigating away from google but still looking for Google element
-                            DriverContext.Driver.Navigate().GoToUrl("yahoo.com");
-                            System.Diagnostics.Debug.WriteLine("Now on yahoo find starts at " + DateTime.Now.ToString("h:mm:ss.fff tt"));
-                            element.GetAttribute("value");
-                            return true; //would kill the wait.until - this is what you would return when your condition is met - we never get here becaue previous line throws error
-                        }
-                        else
-                        {
-                            if (i <= 10)
-                            {
-                                System.Diagnostics.Debug.WriteLine("element value " + element.GetAttribute("value") + " time is " + DateTime.Now.ToString("h:mm:ss.fff tt"));
-                                // Throw exception with d by looking for garbage
-                                System.Diagnostics.Debug.WriteLine("try to use d.FindElemnt " + d.FindElement(by).Text + " time is " + DateTime.Now.ToString("h:mm:ss.fff tt"));
-                            }
-                            return false; // wait.until keeps going
-                        }
-                    }
-                    catch (NoSuchElementException e)
-                    {
-                        System.Diagnostics.Debug.WriteLine("When NSE exception caught " + DateTime.Now.ToString("h:mm:ss.fff tt"));
-                        System.Diagnostics.Debug.WriteLine(e);
-                        return false; // wait.until keeps going
-                    }
-                    catch (StaleElementReferenceException e)
-                    {
-                        System.Diagnostics.Debug.WriteLine("When SERE exception caught " + DateTime.Now.ToString("h:mm:ss.fff tt"));
-                        System.Diagnostics.Debug.WriteLine(e);
-                        return false; // wait.until keeps going
-                    }
-                });
-            }
-            catch (Exception e)
-            {
-                //this means the wait threw an exception and is done trying
-                System.Diagnostics.Debug.WriteLine("Wait Until Exception at " + DateTime.Now.ToString("h:mm:ss.fff tt"));
-                System.Diagnostics.Debug.WriteLine(e);
-            }
-            finally
-            {
-                //Must reset implicit wait for the DriverContext.Driver to or it will remain 0
-                DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(Constants.IMPLICIT_WAIT_DEFAULT));
-                System.Diagnostics.Debug.WriteLine("In finally: WebDriver reset to Default implicit wait default = " + Constants.IMPLICIT_WAIT_DEFAULT);
-            }
+        //        // d below is the webdriver we have created to use the polling mechanism and time out
+        //        // we may use d if we need to using the By in the parameters.  Remember d's implicit wait will be 0
+        //        Wait.Until<bool>((d) =>
+        //        {
+        //            i++;
+        //            System.Diagnostics.Debug.WriteLine("Starting the Logic");
+        //            System.Diagnostics.Debug.WriteLine("i =  " + i + " time is " + DateTime.Now.ToString("h:mm:ss.fff tt"));
+        //            try
+        //            {
+        //                if (i > 10)
+        //                {
+        //                    //cause an exception by navigating away from google but still looking for Google element
+        //                    DriverContext.Driver.Navigate().GoToUrl("yahoo.com");
+        //                    System.Diagnostics.Debug.WriteLine("Now on yahoo find starts at " + DateTime.Now.ToString("h:mm:ss.fff tt"));
+        //                    element.GetAttribute("value");
+        //                    return true; //would kill the wait.until - this is what you would return when your condition is met - we never get here becaue previous line throws error
+        //                }
+        //                else
+        //                {
+        //                    if (i <= 10)
+        //                    {
+        //                        System.Diagnostics.Debug.WriteLine("element value " + element.GetAttribute("value") + " time is " + DateTime.Now.ToString("h:mm:ss.fff tt"));
+        //                        // Throw exception with d by looking for garbage
+        //                        System.Diagnostics.Debug.WriteLine("try to use d.FindElemnt " + d.FindElement(by).Text + " time is " + DateTime.Now.ToString("h:mm:ss.fff tt"));
+        //                    }
+        //                    return false; // wait.until keeps going
+        //                }
+        //            }
+        //            catch (NoSuchElementException e)
+        //            {
+        //                System.Diagnostics.Debug.WriteLine("When NSE exception caught " + DateTime.Now.ToString("h:mm:ss.fff tt"));
+        //                System.Diagnostics.Debug.WriteLine(e);
+        //                return false; // wait.until keeps going
+        //            }
+        //            catch (StaleElementReferenceException e)
+        //            {
+        //                System.Diagnostics.Debug.WriteLine("When SERE exception caught " + DateTime.Now.ToString("h:mm:ss.fff tt"));
+        //                System.Diagnostics.Debug.WriteLine(e);
+        //                return false; // wait.until keeps going
+        //            }
+        //        });
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        //this means the wait threw an exception and is done trying
+        //        System.Diagnostics.Debug.WriteLine("Wait Until Exception at " + DateTime.Now.ToString("h:mm:ss.fff tt"));
+        //        System.Diagnostics.Debug.WriteLine(e);
+        //    }
+        //    finally
+        //    {
+        //        //Must reset implicit wait for the DriverContext.Driver to or it will remain 0
+        //        DriverContext.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
+        //        System.Diagnostics.Debug.WriteLine("In finally: WebDriver reset to Default implicit wait default = " + 10);
+        //    }
 
-        }
+        //}
 
        
 

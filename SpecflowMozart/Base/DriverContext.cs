@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace SpecflowMozart.Base
+namespace SpecflowMozart.Bases
 {
     public class DriverContext : Base
     {

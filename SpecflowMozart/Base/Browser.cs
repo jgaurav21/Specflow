@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpecflowMozart.Base
+namespace SpecflowMozart.Bases
 {
     public class Browser
     {

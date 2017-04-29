@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-using SpecflowMozart.Base;
+using SpecflowMozart.Bases;
 using SpecflowMozart.Extensions;
 using System;
 using System.Collections.Generic;
@@ -10,28 +10,28 @@ using TechTalk.SpecFlow;
 
 namespace SpecflowMozart.Pages
 {
-    public class BasePage
+    public class BasePage : Base
     {
-        #region Properties
-        public TPage As<TPage>() where TPage : BasePage
-        {
-            return (TPage)this;
-        }
+        //#region Properties
+        //public TPage As<TPage>() where TPage : BasePage
+        //{
+        //    return (TPage)this;
+        //}
 
 
-        private IWebDriver _driver { get; set; }
+        //private IWebDriver _driver { get; set; }
 
-        public TPage GetInstance<TPage>() where TPage : BasePage, new()
-        {
-            TPage pageInstance = new TPage()
-            {
-                _driver = DriverContext.Driver
-            };
+        //public TPage GetInstance<TPage>() where TPage : BasePage, new()
+        //{
+        //    TPage pageInstance = new TPage()
+        //    {
+        //        _driver = DriverContext.Driver
+        //    };
             
-            return pageInstance;
-        }
+        //    return pageInstance;
+        //}
 
-        #endregion Properties
+        //#endregion Properties
 
         #region Elements
 
@@ -65,17 +65,21 @@ namespace SpecflowMozart.Pages
         // user name drop down
         private IWebElement ddUserName => DriverContext.Driver.FindElement(By.Id("username"));
 
+        public IWebElement insightLogo => DriverContext.Driver.FindElement(By.XPath("//a[contains(@class,'logo')]"));
+        
+
         #endregion
 
         #region Actions
         /// <summary>
         /// Click on leads button from menu
         /// </summary>
-        public LeadsPage ClickLeadsButton()
+        public void ClickLeadsButton()
         {
             btnLeads.Click();
             DriverContext.Driver.WaitForPageLoaded();
-            return new LeadsPage();
+
+            //return GetInstance<LeadsPage>();
         }
 
         /// <summary>
@@ -90,22 +94,37 @@ namespace SpecflowMozart.Pages
 
         #region Methods
 
+        public void WaitForHomePageLoad()
+        {
+            DriverContext.Driver.WaitForPageLoaded();
+            DriverContext.Driver.WaitForElementVisible(By.XPath("//a[contains(@class,'logo')]"), 60);
+
+            DriverContext.Driver.WaitForElementVisibleQuick(btnLeads);
+        }
+
         /// <summary>
         /// Navigate to Leads Page
         /// </summary>
-        public void NavigateToLeads()
+        public LeadsPage NavigateToLeads()
         {
+            
             // Click on menu button if leads page is not displayed
             if (!btnLeads.Displayed)
             {
                 ClickMenu();
             }
+
+            
             ClickLeadsButton();
 
-            // wait for page to load
-            //DriverContext.Driver.WaitForPageLoaded();
+
+            return GetInstance<LeadsPage>();          
+            
 
         }
+
+
+        
         #endregion
     }
 }

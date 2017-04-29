@@ -1,4 +1,4 @@
-﻿using SpecflowMozart.Base;
+﻿using SpecflowMozart.Bases;
 using SpecflowMozart.Pages;
 using System;
 using TechTalk.SpecFlow.Assist;
@@ -10,7 +10,7 @@ namespace SpecflowMozart.Step
     [Binding]
     public class LoginStep : BaseStep
     {
-        LoginPage login = new LoginPage();
+        //LoginPage login = new LoginPage();
 
         [Given(@"I launch the application")]
         public void GivenILaunchTheBrowser()

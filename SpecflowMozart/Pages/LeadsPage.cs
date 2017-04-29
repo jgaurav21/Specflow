@@ -1,8 +1,9 @@
-﻿using SpecflowMozart.Base;
+﻿using SpecflowMozart.Bases;
 using System;
 using OpenQA.Selenium;
 using SpecflowMozart.PopUps;
 using SpecflowMozart.DTO;
+using SpecflowMozart.Extensions;
 
 namespace SpecflowMozart.Pages
 {
@@ -17,6 +18,9 @@ namespace SpecflowMozart.Pages
         private IWebElement quickSearchInput => DriverContext.Driver.FindElement(By.Id("demo-input-local"));
 
         private IWebElement saveSearchButtonSpan => DriverContext.Driver.FindElement(By.Id("btnSearch-btnInnerEl"));
+
+        private IWebElement leadsSearchGridLoading => DriverContext.Driver.FindElement(By.XPath("//div[@class='x-mask-msg-text' and text()='Loading...']"));
+
 
         #endregion Elements
 
@@ -42,6 +46,34 @@ namespace SpecflowMozart.Pages
 
         #region Methods
 
+        /// <summary>
+        /// Wait for the grid to refresh
+        /// </summary>
+        /// <param name="i"></param>
+        public void WaitForGridRefresh(int i=0)
+        {
+            try
+            {
+                DriverContext.Driver.WaitForElementInvisible(leadsSearchGridLoading, 120);
+            }
+            catch
+            {
+                try
+                {
+                    if (i < 3)
+                    {
+                        WaitForGridRefresh(i + 1);
+                    }
+                }
+                catch { }
+            }
+        }
+
+
+        /// <summary>
+        /// Create a saved search
+        /// </summary>
+        /// <returns></returns>
         public string CreateSaveSearch()
         {
             dtoCreateSaveSearch createSearch = new dtoCreateSaveSearch();

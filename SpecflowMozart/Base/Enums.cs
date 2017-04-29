@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpecflowMozart.Base
+namespace SpecflowMozart.Bases
 {
     /// <summary>
     /// Products of Insight

@@ -5,5 +5,4 @@
 Scenario: User is able to create search tag
 	Given I login to Leads
 	When I apply filters for search tag
-	And I create a saved search
 	Then I apply search tag to filter

@@ -1,6 +1,6 @@
 ﻿using System;
 using OpenQA.Selenium;
-using SpecflowMozart.Base;
+using SpecflowMozart.Bases;
 using TechTalk.SpecFlow;
 using SpecflowMozart.Config;
 using SpecflowMozart.DTO;
@@ -15,7 +15,7 @@ namespace SpecflowMozart.Hooks
         [BeforeFeature]
         public static void BeforeFeature()
         {
-            
+           
             ConfigReader.SetFrameworkSettings();
             dtLogin = GetTestData();
             

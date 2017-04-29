@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using OpenQA.Selenium.Support;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
-using SpecflowMozart.Base;
+using SpecflowMozart.Bases;
 
 namespace SpecflowMozart.Extensions
 {
@@ -70,6 +70,31 @@ namespace SpecflowMozart.Extensions
             return element.GetAttribute("class");
         }
 
-        
+
+        public static void WaitForElementInvisibleXPath(this IWebElement element, int timeout = 60)
+        {
+
+            try
+            {
+                WebDriverWait wait = new WebDriverWait(DriverContext.Driver, TimeSpan.FromSeconds(timeout));
+                wait.PollingInterval = TimeSpan.FromMilliseconds(200);
+                wait.Until<bool>((d) =>
+                {
+                    try
+                    {
+                        return !element.Displayed;
+                    }
+                    catch (Exception)
+                    {
+                        return true;
+                    }
+                });
+
+            }
+            catch { }
+
+        }
+
+
     }
 }

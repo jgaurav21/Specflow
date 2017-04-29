@@ -1,4 +1,4 @@
-﻿using SpecflowMozart.Base;
+﻿using SpecflowMozart.Bases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
