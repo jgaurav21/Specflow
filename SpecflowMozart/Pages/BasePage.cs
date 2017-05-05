@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
@@ -93,12 +94,12 @@ namespace SpecflowMozart.Pages
         #endregion
 
         #region Methods
-
+        
         public void WaitForHomePageLoad()
         {
-            DriverContext.Driver.WaitForPageLoaded();
+            
             DriverContext.Driver.WaitForElementVisible(By.XPath("//a[contains(@class,'logo')]"), 60);
-
+            DriverContext.Driver.WaitForAjax();
             DriverContext.Driver.WaitForElementVisibleQuick(btnLeads);
         }
 

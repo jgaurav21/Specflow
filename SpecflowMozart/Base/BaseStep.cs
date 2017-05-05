@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using SpecflowMozart.Bases;
 
 namespace SpecflowMozart.Bases
 {
@@ -34,15 +35,16 @@ namespace SpecflowMozart.Bases
         {
             get
             {
-                return (BasePage)ScenarioContext.Current["current"];
+                return (BasePage)ScenarioContext.Current["currentPage"];
             }
             set
             {
-                ScenarioContext.Current["current"] = value;
+                ScenarioContext.Current["currentPage"] = value;
             }
         }
 
-       
+
+
 
 
         public static LoginDTO dtLogin { get; set; }

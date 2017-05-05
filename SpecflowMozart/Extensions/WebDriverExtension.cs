@@ -1332,7 +1332,7 @@ namespace SpecflowMozart.Extensions
         /// Wait for any active jQuery to complete.
         /// </summary>
         /// <param name="timeout"></param>
-        public static void WaitForAjax(int timeout = 10)
+        public static void WaitForAjax(this IWebDriver Driver, int timeout = 10)
         {
             WebDriverWait wait = new WebDriverWait(DriverContext.Driver, TimeSpan.FromSeconds(timeout));
             wait.Until(driver1 => (bool)((IJavaScriptExecutor)DriverContext.Driver).ExecuteScript("return jQuery.active == 0"));
