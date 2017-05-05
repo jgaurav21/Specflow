@@ -95,6 +95,15 @@ namespace SpecflowMozart.Extensions
 
         }
 
+        /// <summary>
+        /// Click with javascript
+        /// </summary>
+        /// <param name="element"></param>
+        public static void ClickWithJS(this IWebElement element)
+        {
+            IJavaScriptExecutor js = DriverContext.Driver as IJavaScriptExecutor;
+            js.ExecuteScript("arguments[0].click();", element);
+        }
 
     }
 }

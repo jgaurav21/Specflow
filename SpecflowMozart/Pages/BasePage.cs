@@ -66,8 +66,10 @@ namespace SpecflowMozart.Pages
         // user name drop down
         private IWebElement ddUserName => DriverContext.Driver.FindElement(By.Id("username"));
 
-        public IWebElement insightLogo => DriverContext.Driver.FindElement(By.XPath("//a[contains(@class,'logo')]"));
-        
+        private IWebElement insightLogo => DriverContext.Driver.FindElement(By.XPath("//a[contains(@class,'logo')]"));
+
+        private IWebElement dashboardLoading => DriverContext.Driver.FindElement(By.Id("imgLoading-event"));
+
 
         #endregion
 
@@ -77,8 +79,8 @@ namespace SpecflowMozart.Pages
         /// </summary>
         public void ClickLeadsButton()
         {
-            btnLeads.Click();
-            DriverContext.Driver.WaitForPageLoaded();
+            btnLeads.ClickWithJS();
+            DriverContext.Driver.WaitForElementInvisible(dashboardLoading, 20);
 
             //return GetInstance<LeadsPage>();
         }
@@ -115,9 +117,11 @@ namespace SpecflowMozart.Pages
                 ClickMenu();
             }
 
+            DriverContext.Driver.WaitForAjax();
             
             ClickLeadsButton();
 
+            
 
             return GetInstance<LeadsPage>();          
             

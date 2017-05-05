@@ -66,11 +66,11 @@ namespace SpecflowMozart.Extensions
         /// Also helpful when scrolling to an element in a list doesn't work
         /// </summary>
         /// <param name="element">the element to click</param>
-        public static void ClickWithJS(IWebElement element)
-        {
-            IJavaScriptExecutor js = DriverContext.Driver as IJavaScriptExecutor;
-            js.ExecuteScript("arguments[0].click();", element);
-        }
+        //public static void ClickWithJS(IWebElement element)
+        //{
+        //    IJavaScriptExecutor js = DriverContext.Driver as IJavaScriptExecutor;
+        //    js.ExecuteScript("arguments[0].click();", element);
+        //}
 
 
         /// <summary>
