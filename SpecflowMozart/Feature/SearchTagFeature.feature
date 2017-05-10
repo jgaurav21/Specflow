@@ -1,8 +1,56 @@
 ﻿Feature: SearchTagFeature
-	To verify search tag functionality
+		To verify search tag functionality
 
-
-Scenario: User is able to create search tag
+Scenario: TC_001 User is able to create search tag 
 	Given I login to Leads
 	When I apply filters for search tag
 	Then I apply search tag to filter
+	And I verify search tag on Manage Searches page
+
+Scenario: TC_002 User is able to edit search tag from saved search pop up
+	Given I login to Leads
+	When I create 1 search tag
+	And I edit the filters
+	Then I edit search tag
+
+Scenario: TC_003 User is able to edit search tag from Manage searches page
+	Given I login to Leads
+	When I create 1 search tag
+	And I navigate to Manage Searches page
+	And I edit search tag
+	Then I verify search tag on Saved Search pop up.
+
+Scenario: TC_004 Validate search tag on Search Result page and Details page
+	Given I login to Leads
+	When I create 2 search tag
+	And I apply search tag as filter
+	| option              |
+	| any of the selected |
+	| all of the selected |
+	Then I see search tag on each result
+	When I navigate to project details page
+	Then I verify search tag project details page
+
+Scenario: TC_005 Validate search tag on Manage Searches page
+	Given I login to Leads
+	When I create 1 search tag
+	And I navigate to Manage Searches page
+	And I change email alert and verify search tag
+	And I change CRM export and Verify search tag
+	And I change display on snapshot and verify search tag
+
+	Scenario:  TC_006 Validate delete search tag
+	Given I login to Leads
+	When I create 2 search tag
+	And I navigate to save search pop up
+	And I delete search tag
+	Then I get delete validation message
+	And I navigate to Manage Searches Page
+	And I delete search tag
+	Then I get delete validation message
+
+
+
+	
+
+
