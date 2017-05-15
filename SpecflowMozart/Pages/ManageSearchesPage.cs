@@ -23,19 +23,34 @@ namespace SpecflowMozart.Pages
 
         #region Methods
 
-
+        /// <summary>
+        /// To get the column index of the given column
+        /// </summary>
+        /// <param name="grid">grid to search</param>
+        /// <param name="colName">column Name</param>
+        /// <returns></returns>
         public int GetColumnIndex(ManageSearchesGrids grid,string colName)
         {
-            int i;
+            int counter=0;
             switch(grid)
             {
                 case ManageSearchesGrids.Leads:
-                    //i = leadsGridColumnHeader.FirstOrDefault(x => x.FindElement(By.ClassName("x-column-header-text-inner")).Text == colName)
-                    break;
+                    for(int i=0;i < leadsGridColumnHeader.Count;i++)
+                    {
+                        if(leadsGridColumnHeader[i].FindElement(By.ClassName("x-column-header-text-inner")).Text == colName)
+                        {
+                            counter = i;
+                            break;
+                        }
+                    }
+                    
+                break;
             }
 
-            return i;
+            return counter;
         }
+
+
         #endregion
     }
 }
