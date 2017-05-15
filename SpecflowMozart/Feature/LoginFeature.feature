@@ -1,6 +1,7 @@
 ﻿Feature: LoginFeature
 	Verify the login functionality
 
+	@login
 	Scenario: User is able to login
 		Given I launch the application
 		When I enter <username> into username

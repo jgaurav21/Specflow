@@ -22,4 +22,11 @@ namespace SpecflowMozart.Bases
         Project,
         Companies
     }
+
+    public enum ManageSearchesGrids
+    {
+        Leads,
+        Analyze,
+        Forecast
+    }
 }
