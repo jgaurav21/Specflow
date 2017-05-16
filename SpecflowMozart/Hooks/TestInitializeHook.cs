@@ -42,7 +42,13 @@ namespace SpecflowMozart.Hooks
         [AfterFeature]
         public static void AfterFeature()
         {
-            DriverContext.Driver.Quit();
+            //DriverContext.Driver.Quit();
+        }
+
+        [AfterTestRun]
+        public static void AfterRun()
+        {
+            CloseDriver();
         }
 
         [StepArgumentTransformation(@"I login to (.*)")]

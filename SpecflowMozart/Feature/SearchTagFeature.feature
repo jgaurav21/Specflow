@@ -25,8 +25,8 @@ Scenario: TC_004 Validate search tag on Search Result page and Details page
 	When I create 2 search tag
 	And I apply search tag as filter
 	| option              |
-	| any of the selected |
-	| all of the selected |
+	| At least one search tag |
+	| all search tags |
 	Then I see search tag on each result
 	When I navigate to project details page
 	Then I verify search tag project details page

@@ -53,10 +53,11 @@ namespace SpecflowMozart.Hooks
             DriverContext.Driver.WaitForPageLoaded();
         }
 
-        public void CloseDriver()
+        public static void CloseDriver()
         {
             
-            DriverContext.Driver.Close();
+            DriverContext.Driver.Dispose();
+            DriverContext.Driver = null;
         }
 
         /// <summary>

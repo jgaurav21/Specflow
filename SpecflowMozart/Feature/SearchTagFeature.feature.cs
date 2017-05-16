@@ -137,9 +137,9 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "option"});
             table1.AddRow(new string[] {
-                        "any of the selected"});
+                        "At least one search tag"});
             table1.AddRow(new string[] {
-                        "all of the selected"});
+                        "all search tags"});
 #line 26
  testRunner.And("I apply search tag as filter", ((string)(null)), table1, "And ");
 #line 30
