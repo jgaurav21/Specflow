@@ -92,6 +92,8 @@ namespace SpecflowMozart.PopUps
                 string color = createSearch.searchTagColor ?? "red";
 
                 ClickSearchTagSelector().SelectColor(color);
+
+                searchName = searchName + color;
             }
 
 

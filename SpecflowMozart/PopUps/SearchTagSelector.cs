@@ -32,5 +32,10 @@ namespace SpecflowMozart.PopUps
         }
 
         #endregion Actions
+
+
+        #region Methods
+
+        #endregion
     }
 }

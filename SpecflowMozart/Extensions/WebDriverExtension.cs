@@ -1103,7 +1103,7 @@ namespace SpecflowMozart.Extensions
         /// <param name="jscriptToRun"></param>
         /// <param name="currentWindowHandle"></param>
         /// <returns></returns>
-        public static string RunJavaScript(string jscriptToRun, string currentWindowHandle)
+        public static string RunJavaScript(this IWebDriver Driver, string jscriptToRun, string currentWindowHandle)
         {
             IJavaScriptExecutor js = DriverContext.Driver as IJavaScriptExecutor;
             return js.ExecuteScript("return " + jscriptToRun, currentWindowHandle).ToString();

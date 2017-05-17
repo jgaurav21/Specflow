@@ -1,5 +1,7 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,5 +30,22 @@ namespace SpecflowMozart.Bases
         Leads,
         Analyze,
         Forecast
+    }
+    
+    public enum UserMenuOption
+    {
+        [Description("My Profile")]
+        MyProfile,
+
+        [Description("Manage Searches")]
+        ManageSearches,
+        ManageUsers,
+        ManageTeam,
+        Settings,
+        Support,
+        DocumentCenter,
+        Help,
+        ContactUs,
+        Logout
     }
 }

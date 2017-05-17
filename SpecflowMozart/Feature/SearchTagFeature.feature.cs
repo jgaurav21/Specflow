@@ -77,7 +77,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 6
  testRunner.When("I apply filters for search tag", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 7
- testRunner.Then("I apply search tag to filter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I create a search with search tag", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 8
  testRunner.And("I verify search tag on Manage Searches page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -147,8 +147,8 @@ this.ScenarioSetup(scenarioInfo);
             table1.AddRow(new string[] {
                         "At least one search tag"});
             table1.AddRow(new string[] {
-                        "all of the selected"});
-#line 26
+                        "all search tags"});
+#line 29
  testRunner.And("I apply search tag as filter", ((string)(null)), table1, "And ");
 #line 33
  testRunner.Then("I see search tag on each result", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

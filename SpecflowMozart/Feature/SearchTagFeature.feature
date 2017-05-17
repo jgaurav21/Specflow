@@ -4,7 +4,7 @@
 Scenario: TC_001 User is able to create search tag 
 	Given I login to Leads
 	When I apply filters for search tag
-	Then I apply search tag to filter
+	Then I create a search with search tag
 	And I verify search tag on Manage Searches page
 
 @searchTag

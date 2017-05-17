@@ -64,13 +64,13 @@ namespace SpecflowMozart.Pages
         private IWebElement menuBar => DriverContext.Driver.FindElement(By.Id("sideMenu"));
 
         // user name drop down
-        private IWebElement ddUserName => DriverContext.Driver.FindElement(By.Id("username"));
+        private IWebElement ddUserName => DriverContext.Driver.FindElement(By.Id("userName"));
 
         private IWebElement insightLogo => DriverContext.Driver.FindElement(By.XPath("//a[contains(@class,'logo')]"));
 
         private IWebElement dashboardLoading => DriverContext.Driver.FindElement(By.Id("imgLoading-event"));
 
-
+        private IWebElement userInfo => DriverContext.Driver.FindElement(By.Id("userinfo"));
         #endregion
 
         #region Actions
@@ -93,10 +93,19 @@ namespace SpecflowMozart.Pages
             btnMenu.Click();
         }
 
+        /// <summary>
+        /// Click on User Name drop down
+        /// </summary>
+        public void ClickUserName()
+        {
+            ddUserName.Click();
+        }
+
+       
         #endregion
 
         #region Methods
-        
+
         public void WaitForHomePageLoad()
         {
             
@@ -128,8 +137,96 @@ namespace SpecflowMozart.Pages
 
         }
 
+        /// <summary>
+        /// To click on user drop down
+        /// </summary>
+        public void OpenUserMenu()
+        {
+            if (ddUserName.GetAttribute("class").ToLower().Contains("open"))
+            {
+                // If user menu is not open
+                //SeleniumHelper.HighlightElement(TestRunner.InsightDashboard.UserDropDownArrowButton(),1000);
+                try
+                {
+                    ClickUserName();
+                }
+                catch (Exception)
+                {
+
+                    OpenUserMenu();
+                }
+            }
+            //if (UserMenuLogoutLink().Displayed != true)
+            //{
+            //    OpenUserMenu();
+            //}
+        }
+
+        /// <summary>
+        /// This will open the respective pages from user menu options.
+        /// </summary>
+        /// <param name="option"></param>
+        public void ClickOnUserMenuOption<T>() where T: struct
+        {
+            //Click on down arrow button
+            OpenUserMenu();
+
+            
+
+            //Click on input option
+            //switch (option)
+            //{
+            //    case UserMenuOption.MyProfile:
+            //        UserMenuMyProfileLink().Click();
+            //        //Call method from respective page to wait till grid data is loaded.
+            //        break;
+            //    case UserMenuOption.ManageSearches:
+            //        UserMenuManageSearchesLink().Click();
+            //        //Wait for page load
+            //        SeleniumHelper.WaitForPageReady(30);
+            //        IWebElement header = TestRunner.InsightSettings.LeadsSearchesHeader();
+            //        if (header.GetAttribute("class").Contains("collapsed"))
+            //            header.Click();
+            //        SeleniumHelper.WaitForElementVisible(TestRunner.ManageSearches.LeadsManageSearchGrid(), 60);
+            //        SeleniumHelper.WaitForElementInvisible(TestRunner.ManageSearches.LeadsManageSearchLoading(), 60);
+            //        break;
+            //    case UserMenuOption.ManageUsers:
+            //        UserMenuManageUsersLink().Click();
+            //        //Call method from respective page to wait till grid data is loaded.
+            //        TestRunner.ManageTeam.WaitForGridLoad();
+            //        break;
+            //    case UserMenuOption.ManageTeam:  //Added [Pragati G 3/15/2016 - Added for pulse team and also renamed ManageTeam]
+            //        TestRunner.Pulse.PulseManageTeam().Click();
+            //        SeleniumHelper.WaitForElementVisible(TestRunner.Pulse.NodeContainer(), 2000);
+            //        break;
+            //    case UserMenuOption.Settings:
+            //        UserMenuSettingsLink().Click();
+            //        //Call method from respective page to wait till grid data is loaded.
+            //        //Ranjit P[4/7/2016]
+            //        //TestRunner.InsightSettings.WaitForManageSearchGridExists();
+            //        SeleniumHelper.WaitForElementVisible(TestRunner.InsightSettings.PreferredDefaultProductSectionDiv());
+            //        break;
+            //    case UserMenuOption.Help:
+            //        UserMenuHelpLink().Click();
+            //        //Call method from respective page to wait till grid data is loaded.
+            //        break;
+            //    case UserMenuOption.ContactUs:
+            //        UserMenuContactUsLink().Click();
+            //        //Call method from respective page to wait till grid data is loaded.
+            //        break;
+            //    case UserMenuOption.DocumentCenter:
+            //        UserMenuDocumentCenterLink().Click();
+            //        //Call method from respective page to wait till grid data is loaded.
+            //        break;
+            //    case UserMenuOption.Logout:
+            //        UserMenuLogoutLink().Click();
+            //        //Call method from respective page to wait till grid data is loaded.
+            //        break;
+            //}
+        }
 
         
+
         #endregion
     }
 }

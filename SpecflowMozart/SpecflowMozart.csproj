@@ -107,6 +107,7 @@
     <Compile Include="DTO\dtoCreateSaveSearch.cs" />
     <Compile Include="DTO\LoginDTO.cs" />
     <Compile Include="ExtendedSteps\ExtendedLoginSteps.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\WebDriverExtension.cs" />
     <Compile Include="Extensions\WebElementExtensions.cs" />
     <Compile Include="Feature\LoginFeature.feature.cs">
