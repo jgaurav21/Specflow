@@ -65,30 +65,32 @@ namespace SpecflowMozart.Feature
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("User is able to login")]
+        [NUnit.Framework.CategoryAttribute("login")]
         public virtual void UserIsAbleToLogin()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User is able to login", ((string[])(null)));
-#line 4
- this.ScenarioSetup(scenarioInfo);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User is able to login", new string[] {
+                        "login"});
 #line 5
+ this.ScenarioSetup(scenarioInfo);
+#line 6
   testRunner.Given("I launch the application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "username"});
             table1.AddRow(new string[] {
                         "gauravj@xpanxion.co.in"});
-#line 6
+#line 7
   testRunner.When("I enter <username> into username", ((string)(null)), table1, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "password"});
             table2.AddRow(new string[] {
                         "Test1234"});
-#line 9
+#line 10
   testRunner.And("I enter <password> into password", ((string)(null)), table2, "And ");
-#line 12
-  testRunner.And("I click login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 13
+  testRunner.And("I click login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 14
   testRunner.Then("I logged into application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
