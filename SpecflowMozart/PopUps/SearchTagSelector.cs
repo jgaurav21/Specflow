@@ -16,6 +16,8 @@ namespace SpecflowMozart.PopUps
 
         private List<IWebElement> colors => searchTagColorPopup.FindElements(By.CssSelector("ul>li>a")).ToList();
 
+        private IWebElement colorPicker => DriverContext.Driver.FindElement(By.XPath(".//input[@id='color-picker']"));
+
         #endregion Elements
 
         #region Actions
@@ -24,11 +26,13 @@ namespace SpecflowMozart.PopUps
         /// Select the given color
         /// </summary>
         /// <param name="color"></param>
-        public void SelectColor(string color)
+        public string SelectColor(string color)
         {
             IWebElement element = colors.FirstOrDefault(x => x.GetAttribute("class").ToLower().Contains(color.ToLower()));
 
             element.Click();
+
+            return colorPicker.GetAttribute("value");
         }
 
         #endregion Actions

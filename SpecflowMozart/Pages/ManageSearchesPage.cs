@@ -9,6 +9,10 @@ namespace SpecflowMozart.Pages
 {
     public class ManageSearchesPage : BasePage
     {
+        #region By for pageload
+
+        By leadsSearchesGridBy => By.Id("manageSearchGrid");
+        #endregion
         #region Elements
         private IWebElement leadsManageSearchGrid => DriverContext.Driver.FindElement(By.Id("manageSearchGrid"));
 
@@ -29,6 +33,8 @@ namespace SpecflowMozart.Pages
         }
 
         private List<IWebElement> rowsWithSearchTag => DriverContext.Driver.FindElements(By.XPath(".//div[@class='input-group pick-a-color-markup']//span[@class='display-none']/../ancestor::tr")).ToList();
+
+        private IWebElement leadsManageSearchGridLoading => DriverContext.Driver.FindElement(By.ClassName("manage-searches-grid-loading"));
         
         #endregion
 
@@ -161,6 +167,16 @@ namespace SpecflowMozart.Pages
             }
             //return Convert.ToInt32(recordCount);
             return recordCount;
+        }
+
+        /// <summary>
+        /// Waitfor Manage Searches Page to load
+        /// </summary>
+        /// <typeparam name="ManageSearchesPage"></typeparam>
+        public void WaitForPage()
+        {
+            DriverContext.Driver.WaitForElementVisible(leadsSearchesGridBy, 60);
+            DriverContext.Driver.WaitForElementInvisible(leadsManageSearchGridLoading, 60);
         }
         #endregion
     }

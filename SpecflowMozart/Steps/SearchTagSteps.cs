@@ -5,6 +5,7 @@ using OpenQA.Selenium;
 using SpecflowMozart.Pages;
 using SpecflowMozart.ExtendedStep;
 using SpecflowMozart.Helper;
+using System.Collections.Generic;
 
 namespace SpecflowMozart.Step
 {
@@ -46,6 +47,9 @@ namespace SpecflowMozart.Step
         public void ThenIApplySearchTagToFilter()
         {
             string searchName = currentPage.As<LeadsPage>().CreateSaveSearch();
+
+            Dictionary<string, string> searchColor = new Dictionary<string, string>();
+            searchColor.Add(searchName.Split('|')[0], searchName.Split('|')[1]);
             LogHelpers.Write("Search tag is created successfully");
         }
 
@@ -56,7 +60,10 @@ namespace SpecflowMozart.Step
         [Then(@"I verify search tag on Manage Searches page")]
         public void ThenIVerifySearchTagOnManageSearchesPage()
         {
-            //currentPage.Cl
+            currentPage = currentPage.ClickOnUserMenuOption<ManageSearchesPage>(UserMenuOption.ManageSearches);
+            currentPage.As<ManageSearchesPage>().WaitForPage();
+
+
         }
 
     }

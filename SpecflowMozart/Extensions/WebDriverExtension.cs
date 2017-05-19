@@ -54,6 +54,16 @@ namespace SpecflowMozart.Extensions
             }
         }
 
+        /// <summary>
+        /// Get the element with given text
+        /// </summary>
+        /// <param name="Driver">Driver</param>
+        /// <param name="text">Element text</param>
+        /// <returns></returns>
+        public static IWebElement GetElementByText(this IWebDriver Driver,string text)
+        {
+            return Driver.FindElement(By.XPath("//*[text()='" + text + "']"));
+        }
 
         public static object ExecuteJs(this IWebDriver driver, string script)
         {

@@ -3,6 +3,7 @@ using SpecflowMozart.Bases;
 using SpecflowMozart.Extensions;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -166,13 +167,19 @@ namespace SpecflowMozart.Pages
         /// This will open the respective pages from user menu options.
         /// </summary>
         /// <param name="option"></param>
-        public void ClickOnUserMenuOption<T>() where T: struct
+        public T ClickOnUserMenuOption<T>(UserMenuOption option) where T : BasePage ,new()
         {
             //Click on down arrow button
             OpenUserMenu();
 
+            string elementText = option.GetDescription();
+
+            IWebElement element = DriverContext.Driver.GetElementByText(elementText);
+            element.Click();
+            return new T();
             
 
+            //DriverContext.Driver
             //Click on input option
             //switch (option)
             //{
@@ -187,7 +194,7 @@ namespace SpecflowMozart.Pages
             //        IWebElement header = TestRunner.InsightSettings.LeadsSearchesHeader();
             //        if (header.GetAttribute("class").Contains("collapsed"))
             //            header.Click();
-            //        SeleniumHelper.WaitForElementVisible(TestRunner.ManageSearches.LeadsManageSearchGrid(), 60);
+            //        DriverContext.Driver.WaitForElementVisible(LeadsManageSearchGrid(), 60);
             //        SeleniumHelper.WaitForElementInvisible(TestRunner.ManageSearches.LeadsManageSearchLoading(), 60);
             //        break;
             //    case UserMenuOption.ManageUsers:
