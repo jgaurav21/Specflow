@@ -14,26 +14,11 @@ namespace SpecflowMozart.Pages
 {
     public class BasePage : Base
     {
-        //#region Properties
-        //public TPage As<TPage>() where TPage : BasePage
-        //{
-        //    return (TPage)this;
-        //}
+        #region By for wait
 
+        By dashboardLoadingBy => By.Id("imgLoading-event");
 
-        //private IWebDriver _driver { get; set; }
-
-        //public TPage GetInstance<TPage>() where TPage : BasePage, new()
-        //{
-        //    TPage pageInstance = new TPage()
-        //    {
-        //        _driver = DriverContext.Driver
-        //    };
-            
-        //    return pageInstance;
-        //}
-
-        //#endregion Properties
+        #endregion
 
         #region Elements
 
@@ -69,7 +54,7 @@ namespace SpecflowMozart.Pages
 
         private IWebElement insightLogo => DriverContext.Driver.FindElement(By.XPath("//a[contains(@class,'logo')]"));
 
-        private IWebElement dashboardLoading => DriverContext.Driver.FindElement(By.Id("imgLoading-event"));
+        private IWebElement dashboardLoading => DriverContext.Driver.FindElement(dashboardLoadingBy);
 
         private IWebElement userInfo => DriverContext.Driver.FindElement(By.Id("userinfo"));
         #endregion
@@ -81,7 +66,7 @@ namespace SpecflowMozart.Pages
         public void ClickLeadsButton()
         {
             btnLeads.ClickWithJS();
-            DriverContext.Driver.WaitForElementInvisible(dashboardLoading, 20);
+            DriverContext.Driver.WaitForElementInvisible(dashboardLoadingBy, 20);
 
             //return GetInstance<LeadsPage>();
         }
@@ -122,14 +107,15 @@ namespace SpecflowMozart.Pages
         {
             
             // Click on menu button if leads page is not displayed
+            
             if (!btnLeads.Displayed)
             {
                 ClickMenu();
             }
 
             DriverContext.Driver.WaitForAjax();
-            
-            ClickLeadsButton();
+            if(!btnLeads.GetClass().ToLower().Contains("current"))
+                ClickLeadsButton();
 
             
 

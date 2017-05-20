@@ -31,13 +31,15 @@ namespace SpecflowMozart.Step
             string searchName = currentPage.As<LeadsPage>().CreateSaveSearch();
 
 
+
+
         }
 
 
         [Then(@"I create a search with search tag")]
         public void ThenICreateASearchWithSearchTag()
         {
-            ScenarioContext.Current.Pending();
+            string searchName = currentPage.As<LeadsPage>().CreateSaveSearch();
         }
 
         /// <summary>
@@ -48,8 +50,7 @@ namespace SpecflowMozart.Step
         {
             string searchName = currentPage.As<LeadsPage>().CreateSaveSearch();
 
-            Dictionary<string, string> searchColor = new Dictionary<string, string>();
-            searchColor.Add(searchName.Split('|')[0], searchName.Split('|')[1]);
+            ScenarioContext.Current.Add("searchName", searchName);
             LogHelpers.Write("Search tag is created successfully");
         }
 
@@ -60,8 +61,17 @@ namespace SpecflowMozart.Step
         [Then(@"I verify search tag on Manage Searches page")]
         public void ThenIVerifySearchTagOnManageSearchesPage()
         {
+            // Getting the searchname and color code of the search created earlier
+            string searchName = ScenarioContext.Current["searchName"].ToString();
+            Dictionary<string, string> searchColor = new Dictionary<string, string>();
+            searchColor.Add(searchName.Split('|')[0], searchName.Split('|')[1]);
+            
+            // Verifying search tag on Manage searches page
             currentPage = currentPage.ClickOnUserMenuOption<ManageSearchesPage>(UserMenuOption.ManageSearches);
             currentPage.As<ManageSearchesPage>().WaitForPage();
+
+            string errorMessage = currentPage.As<ManageSearchesPage>().VerifySearchTagColorOfGivenSearches(searchColor);
+            LogHelpers.Write(errorMessage);
 
 
         }

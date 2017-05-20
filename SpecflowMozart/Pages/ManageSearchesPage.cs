@@ -13,6 +13,7 @@ namespace SpecflowMozart.Pages
 
         By leadsSearchesGridBy => By.Id("manageSearchGrid");
         #endregion
+
         #region Elements
         private IWebElement leadsManageSearchGrid => DriverContext.Driver.FindElement(By.Id("manageSearchGrid"));
 

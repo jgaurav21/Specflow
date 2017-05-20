@@ -193,7 +193,7 @@ namespace SpecflowMozart.Extensions
             });
         }
 
-        public static void WaitForElementInvisible(By by, int timeout = 120, int pollingMilliseconds = 5000, bool sleep = false)
+        public static void WaitForElementInvisible(this IWebDriver Driver, By by, int timeout = 120, int pollingMilliseconds = 5000, bool sleep = false)
         {
             if (sleep == true)
             {
