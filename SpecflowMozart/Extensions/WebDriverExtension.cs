@@ -203,6 +203,7 @@ namespace SpecflowMozart.Extensions
             //moved the to less time for the timing 
             Wait.PollingInterval = TimeSpan.FromMilliseconds(pollingMilliseconds);
             Wait.IgnoreExceptionTypes(typeof(NoSuchElementException), typeof(NoSuchFrameException));
+
             Wait.Until<bool>((d) =>
             {
                 try
@@ -336,6 +337,7 @@ namespace SpecflowMozart.Extensions
                 {
                     return true;
                 }
+                
             });
         }
 
@@ -373,7 +375,7 @@ namespace SpecflowMozart.Extensions
         /// </summary>
         /// <param name="id">HTML id of the element</param>
         /// <param name="timeout">seconds to wait before timeout</param>
-        public static void WaitForElementVisible(string id, int timeout = 30, int pollingMilliSeconds = 200, bool logError = false)
+        public static void WaitForElementVisible(this IWebDriver Driver, string id, int timeout = 30, int pollingMilliSeconds = 200, bool logError = false)
         {
             try
             {

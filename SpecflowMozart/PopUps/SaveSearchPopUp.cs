@@ -64,11 +64,11 @@ namespace SpecflowMozart.PopUps
             string searchName = string.Empty;
             if(grid==GridOptions.Project)
             {
-               searchName = "PS_" + string.Format("{ 0:yyyymmddhhmmss}", DateTime.Now);
+               searchName = $"PS_{DateTime.Now.ToString("yyyyMMddHHmmss")}";
             }
             else
             {
-                searchName = "CS_" + string.Format("{0:yyyymmddhhmmss}", DateTime.Now);
+                searchName = $"CS_{DateTime.Now.ToString("yyyyMMddHHmmss")}";
             }
 
 

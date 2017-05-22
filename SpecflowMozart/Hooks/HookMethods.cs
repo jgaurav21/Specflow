@@ -47,16 +47,24 @@ namespace SpecflowMozart.Hooks
 
         }
 
+        /// <summary>
+        /// Navigate to the url
+        /// </summary>
+        /// <param name="url">url</param>
         public void NavigateToURL(string url)
         {
             DriverContext.Driver.Navigate().GoToUrl(url);
             DriverContext.Driver.WaitForPageLoaded();
         }
 
+        /// <summary>
+        /// Clean up the driver
+        /// </summary>
         public static void CloseDriver()
         {
-            
-            DriverContext.Driver.Dispose();
+            if(DriverContext.Driver!=null)
+            DriverContext.Driver.Quit();
+            //DriverContext.Driver.Dispose();
             DriverContext.Driver = null;
         }
 

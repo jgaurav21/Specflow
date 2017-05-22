@@ -66,7 +66,14 @@ namespace SpecflowMozart.Pages
         public void ClickLeadsButton()
         {
             btnLeads.ClickWithJS();
-            DriverContext.Driver.WaitForElementInvisible(dashboardLoadingBy, 20);
+            try
+            {
+                DriverContext.Driver.WaitForElementInvisible(dashboardLoading, 20);
+            }
+            catch (StaleElementReferenceException)
+            {
+                
+            }
 
             //return GetInstance<LeadsPage>();
         }
@@ -91,14 +98,6 @@ namespace SpecflowMozart.Pages
         #endregion
 
         #region Methods
-
-        public void WaitForHomePageLoad()
-        {
-            
-            DriverContext.Driver.WaitForElementVisible(By.XPath("//a[contains(@class,'logo')]"), 60);
-            DriverContext.Driver.WaitForAjax();
-            DriverContext.Driver.WaitForElementVisibleQuick(btnLeads);
-        }
 
         /// <summary>
         /// Navigate to Leads Page
@@ -218,8 +217,39 @@ namespace SpecflowMozart.Pages
             //}
         }
 
-        
 
+
+        #endregion
+
+        #region Synchronization
+        /// <summary>
+        /// Wait for Home Page to load
+        /// </summary>
+        public void WaitForHomePageLoad()
+        {
+
+            //DriverContext.Driver.WaitForElementVisible(By.XPath("//a[contains(@class,'logo')]"), 60);
+            WaitForSavedSearchGrid();
+            WaitForGeoLoad();
+            DriverContext.Driver.WaitForAjax();
+            //DriverContext.Driver.WaitForElementVisibleQuick(btnLeads);
+        }
+
+        /// <summary>
+        /// Wait for Saved Search grid on Dashboard
+        /// </summary>
+        public void WaitForSavedSearchGrid()
+        {
+            DriverContext.Driver.WaitForElementVisible("searchSummaryGrid-body", 30);
+        }
+
+        /// <summary>
+        /// Wait for Geo location graph to load
+        /// </summary>
+        public void WaitForGeoLoad()
+        {
+            DriverContext.Driver.WaitForElementVisible("graphSection", 30);
+        }
         #endregion
     }
 }

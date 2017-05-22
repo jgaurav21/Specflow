@@ -45,7 +45,7 @@ namespace SpecflowMozart.Pages
 
         private IWebElement showProjectWithoutValuesCheckbox => DriverContext.Driver.FindElement(By.Id("chkShowProjectWithoutValus-inputEl"));
 
-
+        private IWebElement checkShowProjectWithoutValues => DriverContext.Driver.FindElement(By.Id("chkShowProjectWithoutValus-displayEl"));
         #endregion Elements
 
         #region Actions
@@ -86,6 +86,13 @@ namespace SpecflowMozart.Pages
             showProjectWithoutValuesCheckbox.Click();
         }
 
+        /// <summary>
+        /// Clear out max project value
+        /// </summary>
+        public void ClearMaxProjectValueEdit()
+        {
+            maxProjectValueInput.Clear();
+        }
 
         #endregion Actions
 
@@ -182,12 +189,14 @@ namespace SpecflowMozart.Pages
                 ExpandFilter("Project Value");
             }
 
+            EnterMinProjectValue(minValue.ToString());
+            ClickQuickSearchInput();
+            WaitForGridRefresh();
+            checkShowProjectWithoutValues.Click();
+            WaitForGridRefresh();
             while (double.Parse(GetSearchResultGridResultCount()) > 1000)
             {
-                
-                EnterMinProjectValue(minValue.ToString());
-                ClickQuickSearchInput();
-                WaitForGridRefresh();
+                ClearMaxProjectValueEdit();
                 EnterMaxProjectValue(maxValue.ToString());
                 ClickQuickSearchInput();
                 WaitForGridRefresh();

@@ -65,10 +65,12 @@ namespace SpecflowMozart.Step
             string searchName = ScenarioContext.Current["searchName"].ToString();
             Dictionary<string, string> searchColor = new Dictionary<string, string>();
             searchColor.Add(searchName.Split('|')[0], searchName.Split('|')[1]);
-            
+
             // Verifying search tag on Manage searches page
-            currentPage = currentPage.ClickOnUserMenuOption<ManageSearchesPage>(UserMenuOption.ManageSearches);
-            currentPage.As<ManageSearchesPage>().WaitForPage();
+            //currentPage = currentPage.ClickOnUserMenuOption<ManageSearchesPage>(UserMenuOption.ManageSearches);
+            //currentPage.As<ManageSearchesPage>().WaitForPage();
+
+            When("I navigate to Manage Searches page");
 
             string errorMessage = currentPage.As<ManageSearchesPage>().VerifySearchTagColorOfGivenSearches(searchColor);
             LogHelpers.Write(errorMessage);
