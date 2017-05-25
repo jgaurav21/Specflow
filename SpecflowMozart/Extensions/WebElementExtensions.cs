@@ -105,5 +105,10 @@ namespace SpecflowMozart.Extensions
             js.ExecuteScript("arguments[0].click();", element);
         }
 
+        public static IWebElement GetParentElement(this IWebElement element)
+        {
+            return element.FindElement(By.XPath("./.."));
+        }
+
     }
 }

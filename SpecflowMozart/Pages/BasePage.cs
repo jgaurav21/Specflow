@@ -50,7 +50,7 @@ namespace SpecflowMozart.Pages
         private IWebElement menuBar => DriverContext.Driver.FindElement(By.Id("sideMenu"));
 
         // user name drop down
-        private IWebElement ddUserName => DriverContext.Driver.FindElement(By.Id("userName"));
+        private IWebElement ddUserName => DriverContext.Driver.FindElement(By.Id("username"));
 
         private IWebElement insightLogo => DriverContext.Driver.FindElement(By.XPath("//a[contains(@class,'logo')]"));
 
@@ -128,7 +128,7 @@ namespace SpecflowMozart.Pages
         /// </summary>
         public void OpenUserMenu()
         {
-            if (ddUserName.GetAttribute("class").ToLower().Contains("open"))
+            if (!ddUserName.GetParentElement().GetClass().ToLower().Contains("open"))
             {
                 // If user menu is not open
                 //SeleniumHelper.HighlightElement(TestRunner.InsightDashboard.UserDropDownArrowButton(),1000);

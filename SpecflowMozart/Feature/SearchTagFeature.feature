@@ -5,7 +5,7 @@ Scenario: TC_001 User is able to create search tag
 	Given I login to Leads
 	When I apply filters for search tag
 	Then I create a search with search tag
-	And I verify search tag on Manage Searches page
+	Then I verify search tag on Manage Searches page
 
 @searchTag
 Scenario: TC_002 User is able to edit search tag from saved search pop up

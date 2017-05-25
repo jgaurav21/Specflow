@@ -234,29 +234,29 @@ namespace SpecflowMozart.Extensions
             });
         }
 
-        public static void WaitForElementInvisibleXPath(IWebElement element, int timeout = 60)
-        {
+        //public static void WaitForElementInvisible(this IWebDriver Driver, IWebElement element, int timeout = 60)
+        //{
 
-            try
-            {
-                WebDriverWait wait = new WebDriverWait(DriverContext.Driver, TimeSpan.FromSeconds(timeout));
-                wait.PollingInterval = TimeSpan.FromMilliseconds(200);
-                wait.Until<bool>((d) =>
-                {
-                    try
-                    {
-                        return !element.Displayed;
-                    }
-                    catch (Exception)
-                    {
-                        return true;
-                    }
-                });
+        //    try
+        //    {
+        //        WebDriverWait wait = new WebDriverWait(DriverContext.Driver, TimeSpan.FromSeconds(timeout));
+        //        wait.PollingInterval = TimeSpan.FromMilliseconds(200);
+        //        wait.Until<bool>((d) =>
+        //        {
+        //            try
+        //            {
+        //                return !element.Displayed;
+        //            }
+        //            catch (Exception)
+        //            {
+        //                return true;
+        //            }
+        //        });
 
-            }
-            catch { }
+        //    }
+        //    catch { }
             
-        }
+        //}
 
         public static void TryClickElementRepeatedlyIgnoringError(IWebElement element, int tries = 100)
         {
@@ -326,19 +326,23 @@ namespace SpecflowMozart.Extensions
 
         public static void WaitForElementInvisible(this IWebDriver Driver, IWebElement element, int timeout = 10)
         {
-            WebDriverWait wait = new WebDriverWait(DriverContext.Driver, TimeSpan.FromSeconds(timeout));
-            wait.Until<bool>((d) =>
+            try
             {
-                try
+                WebDriverWait wait = new WebDriverWait(DriverContext.Driver, TimeSpan.FromSeconds(timeout));
+                wait.Until<bool>((d) =>
                 {
-                    return !element.Displayed;
-                }
-                catch (NoSuchElementException)
-                {
-                    return true;
-                }
-                
-            });
+                    try
+                    {
+                        return !element.Displayed;
+                    }
+                    catch (NoSuchElementException)
+                    {
+                        return true;
+                    }
+
+                });
+            }
+            catch { }
         }
 
         /// <summary>

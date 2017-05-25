@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SpecflowMozart.DTO
 {
-    public class dtoCreateSaveSearch
+    public class CreateSavedSearchFilters
     {
 
         public GridOptions gridOption { get; set; }

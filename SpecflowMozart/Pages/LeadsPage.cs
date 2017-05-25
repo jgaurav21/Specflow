@@ -74,11 +74,9 @@ namespace SpecflowMozart.Pages
         /// Create a saved search
         /// </summary>
         /// <returns></returns>
-        public string CreateSaveSearch()
+        public string CreateSaveSearch(CreateSavedSearchFilters createSearch)
         {
-            dtoCreateSaveSearch createSearch = new dtoCreateSaveSearch();
-            createSearch.gridOption = GridOptions.Project;
-            createSearch.isSearchTag = true;
+            
             string searchName = ClickSaveSearch().CreateSearch(createSearch);
 
             return searchName;

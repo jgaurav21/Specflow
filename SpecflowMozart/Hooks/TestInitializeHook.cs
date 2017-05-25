@@ -28,6 +28,7 @@ namespace SpecflowMozart.Hooks
             LogHelpers.Write($"Start Scenario : {ScenarioContext.Current.ScenarioInfo.Title} ------------");
             StartDriver(Settings.BrowserType);
             DriverContext.Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(30);
+            DriverContext.Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
             NavigateToURL(Settings.AUT);
         }
 

@@ -23,6 +23,8 @@ namespace SpecflowMozart.PopUps
 
         private IWebElement popUpLoadingText => saveSearchPopUp.FindElement(By.Id("popup-loading-text"));
 
+        private IWebElement searchTagButton => saveSearchPopUp.FindElement(By.XPath("//button[contains(@class,'color-dropdown')]"));
+
         private IWebElement searchTagSelector => saveSearchPopUp.FindElement(By.ClassName("color-preview current-color"));
         #endregion Elements
 
@@ -46,7 +48,7 @@ namespace SpecflowMozart.PopUps
 
         public SearchTagSelector ClickSearchTagSelector()
         {
-            searchTagSelector.Click();
+            searchTagButton.Click();
             return new SearchTagSelector();
         }
         #endregion Actions
@@ -80,7 +82,7 @@ namespace SpecflowMozart.PopUps
         /// </summary>
         /// <param name="grid">project / companies</param>
         /// <returns>search name</returns>
-        public string CreateSearch(dtoCreateSaveSearch createSearch)
+        public string CreateSearch(CreateSavedSearchFilters createSearch)
         {
 
             string searchName = GenerateSearchName(createSearch.gridOption);
@@ -93,12 +95,13 @@ namespace SpecflowMozart.PopUps
 
                 string colorCode = ClickSearchTagSelector().SelectColor(color);
 
-                searchName = searchName + colorCode;
+                searchName = $"{searchName}|{colorCode}";
             }
 
 
             ClickSaveButton();
 
+            DriverContext.Driver.WaitForElementInvisible(saveSearchPopUp, 10);
             Thread.Sleep(3000);
 
             return searchName;

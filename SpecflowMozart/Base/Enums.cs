@@ -48,4 +48,12 @@ namespace SpecflowMozart.Bases
         ContactUs,
         Logout
     }
+
+    public enum GridPaginationButton
+    {
+        Next,
+        Last,
+        Prev,
+        First
+    }
 }

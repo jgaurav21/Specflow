@@ -79,7 +79,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 7
  testRunner.Then("I create a search with search tag", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 8
- testRunner.And("I verify search tag on Manage Searches page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("I verify search tag on Manage Searches page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

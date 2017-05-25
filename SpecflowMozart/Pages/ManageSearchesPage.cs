@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using SpecflowMozart.Bases;
 using SpecflowMozart.Extensions;
+using SpecflowMozart.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,22 +22,24 @@ namespace SpecflowMozart.Pages
 
         private IWebElement leadsColumnHeaderTrigger => leadsManageSearchGrid.FindElement(By.ClassName("x-column-header-trigger"));
 
-        private IWebElement resultsPerPageValue
-        {
-            get
-            {
-                return resultsPerPageValue.FindElement(By.XPath(".//div[contains(@class,'x-form-arrow-trigger-default')]/preceding-sibling::div/input"));
-            }
-            set
-            {
-                resultsPerPageValue = value;
-            }
-        }
+        private IWebElement leadsResultsPerPage => leadsManageSearchGrid.FindElement(By.Id("Topcombo-inputEl"));
+        
 
         private List<IWebElement> rowsWithSearchTag => DriverContext.Driver.FindElements(By.XPath(".//div[@class='input-group pick-a-color-markup']//span[@class='display-none']/../ancestor::tr")).ToList();
 
         private IWebElement leadsManageSearchGridLoading => DriverContext.Driver.FindElement(By.ClassName("manage-searches-grid-loading"));
         
+        
+        private IWebElement NavigationButton(GridPaginationButton buttonName,ISearchContext grid)
+        {
+            return grid.FindElement(By.XPath(@".//span[contains(@class,'page-" + buttonName.ToString().ToLower() + "')]"));
+        }
+
+        private IWebElement GetLeadsSearch(IWebElement row)
+        {
+            return row.FindElement(By.XPath(".//td[contains(@class,'manage-search-name')]/div"));
+        }
+
         #endregion
 
         #region Actions
@@ -47,7 +50,7 @@ namespace SpecflowMozart.Pages
         /// <returns>results per page</returns>
         public string GetResultPerPageValue(IWebElement grid)
         {
-            return (resultsPerPageValue = grid).GetAttribute("value");
+            return leadsResultsPerPage.GetAttribute("value");
         }
         #endregion
 
@@ -100,7 +103,7 @@ namespace SpecflowMozart.Pages
                 List<IWebElement> rows = rowsWithSearchTag;
                 foreach (IWebElement row in rows)
                 {
-                    string searchNames = row.FindElement(By.XPath(".//td[contains(@class,'manage-search-name')]/div")).Text;
+                    string searchNames = GetLeadsSearch(row).Text;
                     if (searchColor.ContainsKey(searchNames))
                     {
                         string searchTag = row.FindElement(By.XPath(".//td[contains(@class,'colColorPicker')]//input[@class='pick-a-color']")).GetAttribute("value");
@@ -127,12 +130,13 @@ namespace SpecflowMozart.Pages
 
                 if (j < pageCount)
                 {
-                    //GotoNextPage(LeadsManageSearchGrid());
+                    GotoNextPage(leadsManageSearchGrid);
 
                 }
                 j++;
             }
 
+            LogHelpers.Write($"Verify search tag on Manage searches page : {errorMessage}")
             return errorMessage;
         }
 
@@ -146,6 +150,7 @@ namespace SpecflowMozart.Pages
             double pageCount = 0;
             double count;
             count = GetTotalRecordCount(grid) / double.Parse(GetResultPerPageValue(grid));
+            Console.WriteLine(count.ToString());
             pageCount = Math.Ceiling(count);
 
             return Convert.ToInt32(pageCount);
@@ -179,6 +184,30 @@ namespace SpecflowMozart.Pages
             DriverContext.Driver.WaitForElementVisible(leadsSearchesGridBy, 60);
             DriverContext.Driver.WaitForElementInvisible(leadsManageSearchGridLoading, 60);
         }
+
+        /// <summary>
+        /// Navigate to next page
+        /// </summary>
+        /// <param name="grid">grid</param>
+        /// <param name="loading">waiting element</param>
+        public void GotoNextPage(IWebElement grid, IWebElement loading = null)
+        {
+            if (grid == leadsManageSearchGrid)
+            {
+                NavigationButton(GridPaginationButton.Next, leadsManageSearchGrid).Click();
+                //SeleniumHelper.WaitForElementVisible(leadsManageSearchGrid, 60);
+                DriverContext.Driver.WaitForElementInvisible(leadsManageSearchGridLoading, 60);
+            }
+            else
+            {
+                NavigationButton(GridPaginationButton.Next, grid).Click();
+                
+                DriverContext.Driver.WaitForElementInvisible(loading, 60);
+            }
+        }
+
+
+        
         #endregion
     }
 }
