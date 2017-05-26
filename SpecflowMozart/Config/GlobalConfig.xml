@@ -24,7 +24,9 @@
     <BuildName>DemoBuild</BuildName>
     <!-- Possible Flag Y, N -->
     <IsReport>N</IsReport>
-    
+
+
+    <ReportPath>C:\\SpecflowReports\\</ReportPath>
     <!--<UserName>EAutoTeam</UserName>-->
     <!-- Possible flag Selenium, Specflow  -->
     <Technology>Selenium</Technology>

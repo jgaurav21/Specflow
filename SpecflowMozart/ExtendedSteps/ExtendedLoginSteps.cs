@@ -4,6 +4,7 @@ using TechTalk.SpecFlow;
 using OpenQA.Selenium;
 using SpecflowMozart.Pages;
 using SpecflowMozart.Extensions;
+using AventStack.ExtentReports.Gherkin.Model;
 
 namespace SpecflowMozart.ExtendedStep
 {
@@ -24,6 +25,7 @@ namespace SpecflowMozart.ExtendedStep
             currentPage = currentPage.As<BasePage>().NavigateToLeads();
             DriverContext.Driver.WaitForPageLoaded();
             currentPage.As<LeadsPage>().WaitForGridRefresh();
+            Report.scenario.CreateNode<Given>($"Login to {product} is successful.");
             
         }
 

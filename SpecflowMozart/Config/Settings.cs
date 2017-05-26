@@ -9,6 +9,8 @@ namespace SpecflowMozart.Config
 {
     public class Settings
     {
+        internal static string ReportPath;
+
         public static string useLocalSettings { get; set; }
 
         public static int Timeout { get; set; }

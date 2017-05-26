@@ -136,7 +136,7 @@ namespace SpecflowMozart.Pages
                 j++;
             }
 
-            LogHelpers.Write($"Verify search tag on Manage searches page : {errorMessage}")
+            LogHelpers.Write($"Verify search tag on Manage searches page : {errorMessage}");
             return errorMessage;
         }
 

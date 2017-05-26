@@ -50,6 +50,10 @@
       <HintPath>..\packages\ExcelDataReader.2.1.2.3\lib\net45\Excel.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ExtentReports, Version=3.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExtentReports.3.0.2\lib\ExtentReports.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FeatureSwitcher">
       <HintPath>..\packages\Pickles.2.15.0\tools\FeatureSwitcher.dll</HintPath>
     </Reference>
@@ -172,6 +176,7 @@
     <Compile Include="Base\Browser.cs" />
     <Compile Include="Base\DriverContext.cs" />
     <Compile Include="Base\Enums.cs" />
+    <Compile Include="Base\Reporter.cs" />
     <Compile Include="Config\ConfigReader.cs" />
     <Compile Include="Config\Settings.cs" />
     <Compile Include="DTO\dtoCreateSaveSearch.cs" />

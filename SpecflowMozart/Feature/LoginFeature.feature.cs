@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace SpecflowMozart.Feature
+namespace SpecflowMozart.Features
 {
     using TechTalk.SpecFlow;
     

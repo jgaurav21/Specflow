@@ -7,6 +7,7 @@ using SpecflowMozart.ExtendedStep;
 using SpecflowMozart.Helper;
 using System.Collections.Generic;
 using SpecflowMozart.DTO;
+using AventStack.ExtentReports.Gherkin.Model;
 
 namespace SpecflowMozart.Step
 {
@@ -20,7 +21,9 @@ namespace SpecflowMozart.Step
         public void WhenIApplyFiltersForSearchTag()
         {
             currentPage.As<LeadsPage>().ApplyFiltersForSearchTag();
-            
+
+            Report.scenario.CreateNode<When>($"Filters valid for search tag applied successfully.").Pass("Passed");
+
         }
 
         /// <summary>
@@ -37,6 +40,8 @@ namespace SpecflowMozart.Step
             ScenarioContext.Current.Add("searchName", searchName);
             LogHelpers.Write("Search is created successfully");
 
+            Report.scenario.CreateNode<When>($"Saved Search {searchName} is created successfully.").Pass("Passed");
+
 
 
         }
@@ -48,6 +53,7 @@ namespace SpecflowMozart.Step
         public void ThenICreateASearchWithSearchTag()
         {
             When("I create a saved search");
+            Report.scenario.CreateNode<When>($"Search tag applied is applied to search successfully.").Pass("Passed");
         }
 
         /// <summary>
@@ -73,12 +79,19 @@ namespace SpecflowMozart.Step
 
             // Verifying search tag on Manage searches page
             currentPage = currentPage.ClickOnUserMenuOption<ManageSearchesPage>(UserMenuOption.ManageSearches);
+
+            Report.scenario.CreateNode<When>($"Navigation to Manage Searches page is successful.").Pass("Passed");
             currentPage.As<ManageSearchesPage>().WaitForPage();
 
             //When(@"I navigate to Manage Searches page");
 
             string errorMessage = currentPage.As<ManageSearchesPage>().VerifySearchTagColorOfGivenSearches(searchColor);
             LogHelpers.Write(errorMessage);
+
+            if(errorMessage.Length==0)
+                Report.scenario.CreateNode<When>("Search tag is verified on Manage Seareches page successfully.").Pass("Passed");
+            else
+                Report.scenario.CreateNode<When>($"Search tag is not verified on Manage Seareches page - {errorMessage} ").Pass("Failed");
 
         }
 

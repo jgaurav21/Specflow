@@ -6,6 +6,7 @@ using SpecflowMozart.Config;
 using SpecflowMozart.DTO;
 using SpecflowMozart.Helper;
 using SpecflowMozart.Pages;
+using NUnit.Framework;
 
 namespace SpecflowMozart.Hooks
 {
@@ -17,6 +18,7 @@ namespace SpecflowMozart.Hooks
         {
            
             ConfigReader.SetFrameworkSettings();
+            Report.AddFeature(FeatureContext.Current.FeatureInfo.Title);
             dtLogin = GetTestData();
             
         }
@@ -25,6 +27,7 @@ namespace SpecflowMozart.Hooks
         public void BeforeScenario()
         {
             login = new LoginPage();
+            Report.TestReportInitialize(ScenarioContext.Current.ScenarioInfo.Title);
             LogHelpers.Write($"Start Scenario : {ScenarioContext.Current.ScenarioInfo.Title} ------------");
             StartDriver(Settings.BrowserType);
             DriverContext.Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(30);
@@ -51,6 +54,12 @@ namespace SpecflowMozart.Hooks
         public static void AfterRun()
         {
             CloseDriver();
+        }
+
+        [OneTimeTearDown]
+        public void AssemblyCleanUp()
+        {
+            Report.GenerateReport();
         }
 
         [StepArgumentTransformation(@"I login to (.*)")]
