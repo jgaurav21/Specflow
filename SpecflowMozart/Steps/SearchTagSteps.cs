@@ -89,9 +89,9 @@ namespace SpecflowMozart.Step
             LogHelpers.Write(errorMessage);
 
             if(errorMessage.Length==0)
-                Report.scenario.CreateNode<When>("Search tag is verified on Manage Seareches page successfully.").Pass("Passed");
+                Report.scenario.CreateNode<Then>("Search tag is verified on Manage Seareches page successfully.").Pass("Passed");
             else
-                Report.scenario.CreateNode<When>($"Search tag is not verified on Manage Seareches page - {errorMessage} ").Pass("Failed");
+                Report.scenario.CreateNode<Then>($"Search tag is not verified on Manage Seareches page - {errorMessage} ").Fail("Failed");
 
         }
 

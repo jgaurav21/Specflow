@@ -14,17 +14,17 @@ namespace SpecflowMozart.Helper
         private static StreamWriter _streamw = null;
 
         //Create a file which can store the log information
-        public static void CreateLogFile()
+        public static void CreateLogFile(string name)
         {
             string dir = Settings.LogPath;
             if (Directory.Exists(dir))
             {
-                _streamw = File.AppendText(dir + _logFileName + ".log");
+                _streamw = File.AppendText($"{dir}{name}_{_logFileName}.log");
             }
             else
             {
                 Directory.CreateDirectory(dir);
-                _streamw = File.AppendText(dir + _logFileName + ".log");
+                _streamw = File.AppendText($"{dir}{name}_{_logFileName}.log");
             }
         }
 

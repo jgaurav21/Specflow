@@ -67,10 +67,10 @@ namespace SpecflowMozart.Config
             Settings.userName = userName.Value.ToString();
             Settings.password = password.Value.ToString();
             Settings.ReportPath = reportPath.Value.ToString();
-            LogHelpers.CreateLogFile();
-            string path = $"{Settings.ReportPath}\\Test_{DateTime.Now.ToString("yyyyMMddHHmmss")}";
-            Report.ReportInitialize(path);
-            Console.WriteLine(path);
+            //LogHelpers.CreateLogFile();
+            //string path = $"{Settings.ReportPath}\\Test_{DateTime.Now.ToString("yyyyMMddHHmmss")}";
+            //Report.ReportInitialize(path);
+            //Console.WriteLine(path);
 
 
         }

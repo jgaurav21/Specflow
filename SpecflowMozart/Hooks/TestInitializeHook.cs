@@ -16,9 +16,12 @@ namespace SpecflowMozart.Hooks
         [BeforeFeature]
         public static void BeforeFeature()
         {
-           
+            string featureName = FeatureContext.Current.FeatureInfo.Title;
             ConfigReader.SetFrameworkSettings();
-            Report.AddFeature(FeatureContext.Current.FeatureInfo.Title);
+            string path = $"{Settings.ReportPath}\\Test_{featureName}_{DateTime.Now.ToString("yyyyMMddHHmmss")}.html";
+            Report.ReportInitialize(path);
+            LogHelpers.CreateLogFile(featureName);
+            Report.AddFeature(featureName);
             dtLogin = GetTestData();
             
         }
@@ -47,19 +50,21 @@ namespace SpecflowMozart.Hooks
         [AfterFeature]
         public static void AfterFeature()
         {
+            Report.GenerateReport();
             //DriverContext.Driver.Quit();
         }
 
         [AfterTestRun]
         public static void AfterRun()
         {
+            
             CloseDriver();
         }
 
         [OneTimeTearDown]
         public void AssemblyCleanUp()
         {
-            Report.GenerateReport();
+            //Report.GenerateReport();
         }
 
         [StepArgumentTransformation(@"I login to (.*)")]
